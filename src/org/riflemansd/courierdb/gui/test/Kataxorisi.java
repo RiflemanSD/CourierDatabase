@@ -5,6 +5,13 @@
  */
 package org.riflemansd.courierdb.gui.test;
 
+import java.util.Date;
+import org.riflemansd.courierdb.CourierDBM;
+import org.riflemansd.courierdb.entrys.dbs.DistributorS;
+import org.riflemansd.courierdb.entrys.dbs.PackageOutS;
+import org.riflemansd.courierdb.entrys.dbs.VoucherS;
+import org.riflemansd.courierdb.utils.MyUtils;
+
 /**
  *
  * @author RiflemanSD
@@ -108,6 +115,11 @@ public class Kataxorisi extends javax.swing.JPanel {
         });
 
         okButton.setText("OK");
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
 
         cancelButton.setText("Cancel");
 
@@ -223,6 +235,31 @@ public class Kataxorisi extends javax.swing.JPanel {
     private void distIDTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_distIDTFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_distIDTFActionPerformed
+
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        int did = MyUtils.stringToInt(this.distIDTF.getText());
+        String distname = this.distNameTF.getText();
+        
+        String voucherID = this.voucherIDTF.getText();
+        double cod = MyUtils.stringToDouble(this.codTF.getText());
+        double charge = MyUtils.stringToDouble(this.chargeTF.getText());
+        String time = MyUtils.dateToString(new Date());
+        String rtime = MyUtils.dateToString(this.datePicker.getDate());
+        boolean receipt = this.receiptB.isSelected();
+        
+        DistributorS dist = new DistributorS(did, distname);
+        CourierDBM.database.saveDistributor(dist);
+        dist = CourierDBM.database.getDistributor(did);
+        int distid = dist.getId();
+        
+        VoucherS voucher = new VoucherS(voucherID, cod, charge, receipt);
+        CourierDBM.database.saveVoucher(voucher);
+        voucher = CourierDBM.database.getVoucher(voucherID);
+        int vid = voucher.getId();
+        
+        PackageOutS out = new PackageOutS(0, vid, distid, time, rtime);
+        CourierDBM.database.savePackageOut(out);
+    }//GEN-LAST:event_okButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

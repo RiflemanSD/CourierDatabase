@@ -65,6 +65,11 @@ public class Dromologisi extends javax.swing.JPanel {
 
         kataxwrisiButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         kataxwrisiButton.setText("Καταχώρηση");
+        kataxwrisiButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kataxwrisiButtonActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Voucher:");
@@ -144,6 +149,12 @@ public class Dromologisi extends javax.swing.JPanel {
     private void distIDTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_distIDTFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_distIDTFActionPerformed
+
+    private void kataxwrisiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kataxwrisiButtonActionPerformed
+        this.distIDTF.getText();
+        this.distNameTF.getText();
+        this.voucherID.getText();
+    }//GEN-LAST:event_kataxwrisiButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
