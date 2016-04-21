@@ -6,6 +6,7 @@
 package org.riflemansd.courierdb.gui.test;
 
 import java.util.Date;
+import javax.swing.JOptionPane;
 import org.riflemansd.courierdb.CourierDBM;
 import org.riflemansd.courierdb.entrys.dbs.PackageInS;
 import org.riflemansd.courierdb.entrys.dbs.VoucherS;
@@ -88,12 +89,28 @@ public class Aparadota extends javax.swing.JPanel {
 
     private void kataxwrisiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kataxwrisiButtonActionPerformed
         String voucherId = this.voucherIDTF.getText();
+        if (voucherId.isEmpty())  {
+            JOptionPane.showMessageDialog(this, "Το VoucherID δεν μπορεί να είναι κενό", "Αποτυχία", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        else if (MyUtils.stringToDouble(voucherId) == -1) {
+            JOptionPane.showMessageDialog(this, "Το VoucherID δεν μπορεί να περιέχει χαρακτήρες", "Αποτυχία", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         Date date = new Date();
+        
+        if (voucherId.length() != 12)  {
+            int a = JOptionPane.showConfirmDialog(this, "Το VoucherID που δώσατε έχει διαφορετικό μέγεθος από το συνηθισμένο\nΕίστε σίγουρος ότι θέλετε να συνεχήσετε?", "Προειδοποίηση", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            System.out.println(a);
+            
+            if (a == 1) return;
+        }
         
         CourierDBM.database.saveVoucher(new VoucherS(voucherId, -1, -1, false));
         int id = CourierDBM.database.getVoucher(voucherId).getId();
         
         CourierDBM.database.savePackageIn(new PackageInS(id, MyUtils.dateToString(date)));
+        this.voucherIDTF.setText("");
     }//GEN-LAST:event_kataxwrisiButtonActionPerformed
 
 

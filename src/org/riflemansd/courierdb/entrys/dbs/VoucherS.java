@@ -47,5 +47,10 @@ public class VoucherS extends Entry {
         this.receipt = receipt;
     }
     
-    
+    @Override
+    public String toString() {
+        String str = this.getName() + "," + this.codcash + "," + this.chargecash + "," + this.receipt;
+        
+        return str;
+    }
 }

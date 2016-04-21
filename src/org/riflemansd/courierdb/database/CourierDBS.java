@@ -68,7 +68,13 @@ public class CourierDBS {
         double charge = voucher.getChargecash(); if (charge < 0) return false;
         boolean isr = voucher.isReceipt();
         
-        manager.insert("voucher","voucherid,codcash,chargecash,isreceipt", name, cash, charge, isr);
+        VoucherS v = getVoucher(name);
+        if (v != null) {
+            manager.update("voucher", "codcash = " + cash + ", chargecash = " + charge + ", isreceipt = " + isr, "voucherid = '" + name + "'");
+        }
+        else {
+            manager.insert("voucher","voucherid,codcash,chargecash,isreceipt", name, cash, charge, isr);
+        }
         
         return true;
     }
@@ -84,7 +90,9 @@ public class CourierDBS {
         double charge = -1; if (!r[2].equals("NULL")) cod = MyUtils.stringToDouble(r[2]);
         boolean isr = MyUtils.stringToBoolean(r[3]);
         
-        return new VoucherS(voucherid, cod, charge, isr);
+        VoucherS v = new VoucherS(voucherid, cod, charge, isr);
+        System.out.println(v);
+        return v;
     }
     
     public boolean savePackageIn(PackageInS pack) {
