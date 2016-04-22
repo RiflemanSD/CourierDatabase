@@ -139,9 +139,9 @@
         <Property name="text" type="java.lang.String" value="&#x388;&#x3c9;&#x3c2;"/>
       </Properties>
     </Component>
-    <Component class="org.riflemansd.businessprofit.panels.DatePicker" name="datePickerAPO">
+    <Component class="org.riflemansd.courierdb.gui.DatePicker" name="datePickerAPO">
     </Component>
-    <Component class="org.riflemansd.businessprofit.panels.DatePicker" name="datePickerEWS">
+    <Component class="org.riflemansd.courierdb.gui.DatePicker" name="datePickerEWS">
     </Component>
     <Component class="javax.swing.JButton" name="SearchButton">
       <Properties>
