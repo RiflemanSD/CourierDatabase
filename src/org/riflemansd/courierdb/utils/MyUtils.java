@@ -23,6 +23,10 @@ public class MyUtils {
         if (str.equals("true")) return true;
         else return false;
     }
+    public static String booleanToString(boolean str) {
+        if (str) return "true";
+        else return "false";
+    }
     public static int stringToInt(String str) {
         int number = -1;
         

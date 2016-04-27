@@ -64,43 +64,61 @@ public class CourierDBS {
     
     public boolean saveVoucher(VoucherS voucher) {
         String name = voucher.getName(); if (name == null) return false;
-        double cash = voucher.getCodcash(); if (cash < 0) return false;
-        double charge = voucher.getChargecash(); if (charge < 0) return false;
-        boolean isr = voucher.isReceipt();
+        double cash = voucher.getCodcash(); 
+        double charge = voucher.getChargecash();
+        boolean isr = voucher.isReceipt(); String isrs = MyUtils.booleanToString(isr);
         
         VoucherS v = getVoucher(name);
         if (v != null) {
-            manager.update("voucher", "codcash = " + cash + ", chargecash = " + charge + ", isreceipt = " + isr, "voucherid = '" + name + "'");
+            manager.update("voucher", "codcash = " + cash + ", chargecash = " + charge + ", isreceipt = '" + isrs + "'", "voucherid = '" + name + "'");
         }
         else {
-            manager.insert("voucher","voucherid,codcash,chargecash,isreceipt", name, cash, charge, isr);
+            manager.insert("voucher","voucherid,codcash,chargecash,isreceipt", name, cash, charge, isrs);
         }
         
+        System.out.println("true");
         return true;
     }
-    
-    public VoucherS getVoucher(String voucherid) {
-        String result = manager.select("voucher","voucherid,codcash,chargecash,isreceipt", "voucherid = '" + voucherid + "'", 5);
+    public VoucherS getVoucher(int id) {
+        String result = manager.select("voucher","id,voucherid,codcash,chargecash,isreceipt", "id = " + id, 5);
         
         if (result.length() == 0) return null;
         
         String[] r = result.split(",");
         
-        double cod = -1; if (!r[1].equals("NULL")) cod = MyUtils.stringToDouble(r[1]);
-        double charge = -1; if (!r[2].equals("NULL")) cod = MyUtils.stringToDouble(r[2]);
-        boolean isr = MyUtils.stringToBoolean(r[3]);
+        String voucherid = r[1];
+        double cod = -1; if (!r[1].equals("NULL")) cod = MyUtils.stringToDouble(r[2]);
+        double charge = -1; if (!r[2].equals("NULL")) cod = MyUtils.stringToDouble(r[3]);
+        boolean isr = MyUtils.stringToBoolean(r[4]);
         
-        VoucherS v = new VoucherS(voucherid, cod, charge, isr);
+        VoucherS v = new VoucherS(id, voucherid, cod, charge, isr);
+        System.out.println(v);
+        return v;
+    }
+    public VoucherS getVoucher(String voucherid) {
+        String result = manager.select("voucher","id,voucherid,codcash,chargecash,isreceipt", "voucherid = '" + voucherid + "'", 5);
+        
+        if (result.length() == 0) return null;
+        
+        String[] r = result.split(",");
+        
+        int id = MyUtils.stringToInt(r[0]);
+        double cod = -1; if (!r[1].equals("NULL")) cod = MyUtils.stringToDouble(r[2]);
+        double charge = -1; if (!r[2].equals("NULL")) cod = MyUtils.stringToDouble(r[3]);
+        boolean isr = MyUtils.stringToBoolean(r[4]);
+        
+        VoucherS v = new VoucherS(id, voucherid, cod, charge, isr);
         System.out.println(v);
         return v;
     }
     
     public boolean savePackageIn(PackageInS pack) {
+        System.out.println(pack.getVoucherId() + " " + pack.getTime());
         int id = pack.getVoucherId(); if (id < 0) return false;
         String time = pack.getTime(); if (time == null) return false;
         
         manager.insert("packagein","voucherid,time", id, time);
-        
+        System.out.println("bige");
         return true;
     }
     public boolean savePackageOut(PackageOutS pack) {
@@ -133,7 +151,16 @@ public class CourierDBS {
         
         return r;
     }
-
+    
+    public String[] getPackagesIn() {
+        String result = manager.select("packagein","voucherid,time", "", 2);
+        System.out.println(result);
+        if (result.length() == 0) return null;
+        
+        String[] r = result.split("\n");
+        
+        return r;
+    }
     /**
      * voucherid,distributorid,time,rtime,info
      * voucherid,codcash,chargecash,isreceipt

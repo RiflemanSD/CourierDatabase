@@ -56,8 +56,10 @@
     <Container class="javax.swing.JPanel" name="tablePanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder/>
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="&#x3a0;&#x3af;&#x3bd;&#x3b1;&#x3ba;&#x3b1;&#x3c2; &#x391;&#x3c0;&#x3bf;&#x3c4;&#x3b5;&#x3bb;&#x3b5;&#x3c3;&#x3bc;&#x3ac;&#x3c4;&#x3c9;&#x3bd;">
+              <Color PropertyName="color" blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
+            </TitledBorder>
           </Border>
         </Property>
       </Properties>
@@ -70,12 +72,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="398" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="388" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="201" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="159" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -83,8 +85,8 @@
     <Container class="javax.swing.JPanel" name="searchPanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder/>
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="&#x3a6;&#x3b9;&#x3bb;&#x3c4;&#x3ac;&#x3c1;&#x3b9;&#x3c3;&#x3bc;&#x3b1; &#x3ba;&#x3b1;&#x3b9; &#x391;&#x3bd;&#x3b1;&#x3b6;&#x3ae;&#x3c4;&#x3b7;&#x3c3;&#x3b7;"/>
           </Border>
         </Property>
       </Properties>

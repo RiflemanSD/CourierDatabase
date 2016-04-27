@@ -61,7 +61,7 @@ public class GUIDataTest extends javax.swing.JFrame {
         tablePanel.add(sc, BorderLayout.CENTER);
 
         searchPanel.setLayout(new BorderLayout());
-        sPanel = new SearchPanel(this);
+        sPanel = new SearchPanel(columns, columnClasses);
         searchPanel.add(sPanel, BorderLayout.CENTER);
 
 //        defineData();
@@ -113,22 +113,22 @@ public class GUIDataTest extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 102, 0));
 
-        tablePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tablePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Πίνακας Αποτελεσμάτων", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.black));
 
         javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
         tablePanel.setLayout(tablePanelLayout);
         tablePanelLayout.setHorizontalGroup(
             tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 398, Short.MAX_VALUE)
+            .addGap(0, 388, Short.MAX_VALUE)
         );
         tablePanelLayout.setVerticalGroup(
             tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 201, Short.MAX_VALUE)
+            .addGap(0, 159, Short.MAX_VALUE)
         );
 
         getContentPane().add(tablePanel, java.awt.BorderLayout.CENTER);
 
-        searchPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        searchPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Φιλτάρισμα και Αναζήτηση"));
 
         javax.swing.GroupLayout searchPanelLayout = new javax.swing.GroupLayout(searchPanel);
         searchPanel.setLayout(searchPanelLayout);
@@ -198,7 +198,7 @@ public class GUIDataTest extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                GUIDataTest test = new GUIDataTest("VoucherID,Ημερομηνεία,Κατάσταση,Παραλαβή", "s", new Date(), "s", true);
+                GUIDataTest test = new GUIDataTest("VoucherID,Ημερομηνεία,Κατάσταση,Παραλαβή,number", "s", new Date(), "s", true, 1.5);
                 test.setVisible(true);
 
                 test.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

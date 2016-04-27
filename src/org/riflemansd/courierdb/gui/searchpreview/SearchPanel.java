@@ -1,6 +1,12 @@
 package org.riflemansd.courierdb.gui.searchpreview;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Rectangle;
 import java.util.Date;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
 
 
 /** <h1>﻿SearchPanel</h1>
@@ -16,47 +22,40 @@ import java.util.Date;
  * @author RiflemanSD
  */
 public class SearchPanel extends javax.swing.JPanel {
-    private GUIDataTest gui;
     /**
      * Creates new form SearchPanel
      * 
      * "VoucherID,Ημερομηνεία,Κατάσταση,Παραλαβή", "s", new Date(), "s", true
      * 
      */
-    public SearchPanel(GUIDataTest gui) {
-        this.gui = gui;
+    public SearchPanel(String columns, Object... classes) {
         initComponents();
         
-        categoryJCB.removeAllItems();
-        categoryJCB.addItem("Όλες");
-//        String[] categorys = BusinessProfit.database.getCategorys().split("\n");
-//        
-//        for (String cat : categorys) {
-//            categoryJCB.addItem(cat.split(",")[1]);
-//        }
+        //this.jPanel1.setLayout(new BoxLayout(this.jPanel1, BoxLayout.PAGE_AXIS));
         
-        esodoeksodoJCB.removeAllItems();
-        esodoeksodoJCB.addItem("Όλα");
-        esodoeksodoJCB.addItem("Έσοδο");
-        esodoeksodoJCB.addItem("Έξοδο");
+        int i = 0;
+        for (String c : columns.split(",")) {
+            JPanel p;
+            
+            if (classes[i] instanceof String) {
+                p = new StringSP(c);
+            } else if (classes[i] instanceof Number) {
+                p = new NumberSP(c);
+            } else if (classes[i] instanceof Date) {
+                p = new DateSP(c);
+            } else if (classes[i] instanceof Boolean) {
+                p = new BooleanSP(c);
+            } else {
+                p = new StringSP(c);
+            }
+            p.setBounds(new Rectangle(5, 5 + 40*i, 600, 40));
+            this.jPanel1.add(p);
+            
+            i++;
+        }
+        
+        this.jPanel1.setPreferredSize(new Dimension(200, 10 + classes.length*40));
     }
-
-    public String getCategory() {
-        return (String) this.categoryJCB.getSelectedItem();
-    }
-    public int getInOut() {
-        return this.esodoeksodoJCB.getSelectedIndex();
-    }
-    
-    public Date[] getDates() {
-        Date[] dates = {this.datePickerAPO.getDate(),this.datePickerEWS.getDate()};
-        return dates;
-    }
-    
-    public boolean isDateSearch() {
-        return this.isDateSearch.isSelected();
-    }
-
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,92 +66,39 @@ public class SearchPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        esodoeksodoJCB = new javax.swing.JComboBox();
-        categoryJCB = new javax.swing.JComboBox();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        datePickerAPO = new org.riflemansd.courierdb.gui.DatePicker();
-        datePickerEWS = new org.riflemansd.courierdb.gui.DatePicker();
         SearchButton = new javax.swing.JButton();
-        isDateSearch = new javax.swing.JCheckBox();
+        jPanel1 = new javax.swing.JPanel();
 
-        esodoeksodoJCB.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        esodoeksodoJCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Έσοδο", "Έξοδο" }));
-
-        categoryJCB.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        categoryJCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Κατηγορία");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Έσοδο/Έξοδο");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Από");
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("Έως");
-
-        SearchButton.setText("Search");
+        SearchButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        SearchButton.setText("Ανανέωση");
         SearchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SearchButtonActionPerformed(evt);
             }
         });
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setLayout(null);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(esodoeksodoJCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(categoryJCB, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(SearchButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(datePickerAPO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(datePickerEWS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(isDateSearch)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(SearchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(categoryJCB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(esodoeksodoJCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(datePickerAPO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(datePickerEWS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SearchButton))
-                    .addComponent(isDateSearch)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SearchButton)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -163,14 +109,6 @@ public class SearchPanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton SearchButton;
-    private javax.swing.JComboBox categoryJCB;
-    private org.riflemansd.courierdb.gui.DatePicker datePickerAPO;
-    private org.riflemansd.courierdb.gui.DatePicker datePickerEWS;
-    private javax.swing.JComboBox esodoeksodoJCB;
-    private javax.swing.JCheckBox isDateSearch;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

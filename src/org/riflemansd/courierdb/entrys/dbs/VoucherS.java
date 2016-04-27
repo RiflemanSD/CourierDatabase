@@ -16,6 +16,12 @@ public class VoucherS extends Entry {
     private double chargecash;
     private boolean receipt;
     
+    public VoucherS(int id, String name, double codcash, double chargecash, boolean receipt) {
+        super(id, name);
+        this.codcash = codcash;
+        this.chargecash = chargecash;
+        this.receipt = receipt;
+    }
     public VoucherS(String name, double codcash, double chargecash, boolean receipt) {
         super(name);
         this.codcash = codcash;

@@ -108,7 +108,7 @@ public class Aparadota extends javax.swing.JPanel {
         
         CourierDBM.database.saveVoucher(new VoucherS(voucherId, -1, -1, false));
         int id = CourierDBM.database.getVoucher(voucherId).getId();
-        
+        System.out.println(id);
         CourierDBM.database.savePackageIn(new PackageInS(id, MyUtils.dateToString(date)));
         this.voucherIDTF.setText("");
     }//GEN-LAST:event_kataxwrisiButtonActionPerformed
