@@ -12,18 +12,29 @@ package org.riflemansd.courierdb.entrys.dbs;
 public class PackageInS {
     private int id;
     private int voucherId;
+    private int distributorId;
     private String time;
 
-    public PackageInS(int voucherId, String time) {
+    public PackageInS(int voucherId, int distributorId, String time) {
         this.id = -1;
         this.voucherId = voucherId;
+        this.distributorId = distributorId;
         this.time = time;
     }
     
-    public PackageInS(int id, int voucherId, String time) {
+    public PackageInS(int id, int voucherId, int distributorId, String time) {
         this.id = id;
         this.voucherId = voucherId;
+        this.distributorId = distributorId;
         this.time = time;
+    }
+
+    public int getDistributorId() {
+        return distributorId;
+    }
+
+    public void setDistributorId(int distributorId) {
+        this.distributorId = distributorId;
     }
     
     public int getId() {

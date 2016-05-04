@@ -25,8 +25,9 @@ public class CourierDBS {
         
         manager.createTable("voucher", "id,voucherid,codcash,chargecash,isreceipt", 1, "vid", 1, 1, true);
         
-        manager.createTable("packagein", "id,voucherid,time", 1, 1, "rtime");
+        //manager.createTable("packagein", "id,voucherid,time", 1, 1, "rtime");
         manager.createTable("packageout", "id,voucherid,distributorid,time,rtime,info", 1, 1, 1, "null", "null", "null");
+        manager.createTable("packagein", "id,voucherid,distributorid,time", 1, 1, 1, "rtime");
         
         
         //Settings
@@ -43,24 +44,34 @@ public class CourierDBS {
     }
     
     public DistributorS getDistributor(String name) {
-        String result = manager.select("distributor", "did,name", "name = '" + name + "'", 3);
+        String result = manager.select("distributor", "id,did,name", "name = '" + name + "'", 3);
         if (result.length() == 0) return null;
         
         String[] r = result.split(",");
         int id = MyUtils.stringToInt(r[0]);
+        int did = MyUtils.stringToInt(r[1]);
         
-        return new DistributorS(id, name);
+        return new DistributorS(id, did, name);
     }
     public DistributorS getDistributor(int dID) {
-        String result = manager.select("distributor", "did,name", "did = '" + dID + "'", 3);
+        String result = manager.select("distributor", "id,did,name", "did = '" + dID + "'", 3);
         if (result.length() == 0) return null;
         
         String[] r = result.split(",");
-        String name = r[1];
+        int id = MyUtils.stringToInt(r[0]);
+        String name = r[2];
         
-        return new DistributorS(dID, name);
+        return new DistributorS(id, dID, name);
     }
-    
+    public String[] getDistributors() {
+        String result = manager.select("distributor", "did,name", "", 2);
+        System.out.println(result);
+        if (result.length() == 0) return null;
+        
+        String[] r = result.split("\n");
+        
+        return r;
+    }
     
     public boolean saveVoucher(VoucherS voucher) {
         String name = voucher.getName(); if (name == null) return false;
@@ -112,12 +123,23 @@ public class CourierDBS {
         return v;
     }
     
+    public String[] getVouchers() {
+        String result = manager.select("voucher","id,voucherid,codcash,chargecash,isreceipt", "", 5);
+        System.out.println(result);
+        if (result.length() == 0) return null;
+        
+        String[] r = result.split("\n");
+        
+        return r;
+    }
+    
     public boolean savePackageIn(PackageInS pack) {
         System.out.println(pack.getVoucherId() + " " + pack.getTime());
         int id = pack.getVoucherId(); if (id < 0) return false;
+        int distid = pack.getDistributorId(); if (distid < 0) return false;
         String time = pack.getTime(); if (time == null) return false;
         
-        manager.insert("packagein","voucherid,time", id, time);
+        manager.insert("packagein","voucherid,distributorid,time", id, distid, time);
         System.out.println("bige");
         return true;
     }
@@ -134,7 +156,7 @@ public class CourierDBS {
     }
     
     public String[] getPackagesIn(String voucherid) {
-        String result = manager.select("packagein","voucherid,time", "voucherid = '" + voucherid + "'", 3);
+        String result = manager.select("packagein","voucherid,distributorid,time", "voucherid = '" + voucherid + "'", 3);
         
         if (result.length() == 0) return null;
         
@@ -153,7 +175,7 @@ public class CourierDBS {
     }
     
     public String[] getPackagesIn() {
-        String result = manager.select("packagein","voucherid,time", "", 2);
+        String result = manager.select("packagein","voucherid,distributorid,time", "", 3);
         System.out.println(result);
         if (result.length() == 0) return null;
         
@@ -178,4 +200,26 @@ public class CourierDBS {
 //    public String[] getVouchersByDistributor(int dID) {
 //        
 //    }
+    
+    public void delete(int tableId, int rowId) {
+        String table = null;
+        if (tableId == 0) {
+            table = "distributor";
+        }
+        else if (tableId == 1) {
+            table = "voucher";
+        }
+        else if (tableId == 2) {
+            table = "packagein";
+        }
+        else if (tableId == 3) {
+            table = "packageout";
+        }
+        
+        if (table != null) manager.delete(table, "id = " + rowId);
+    }
+    
+    public void close() {
+        this.manager.close();
+    }
 }

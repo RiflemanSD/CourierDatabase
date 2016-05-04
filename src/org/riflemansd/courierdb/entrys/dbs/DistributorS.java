@@ -14,6 +14,11 @@ import org.riflemansd.courierdb.entrys.Entry;
 public class DistributorS extends Entry{
     private int dID;
     
+    public DistributorS(int id, int dID, String name) {
+        super(id, name);
+        this.dID = dID;
+    }
+    
     public DistributorS(int dID, String name) {
         super(name);
         this.dID = dID;

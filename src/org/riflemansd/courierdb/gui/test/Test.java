@@ -31,8 +31,13 @@ public class Test {
         
         String[] data = CourierDBM.database.getPackagesIn();
         
-        for (String d : data) {
-            gui.addRow(CourierDBM.database.getVoucher(MyUtils.stringToInt(d.split(",")[0])).getName(), MyUtils.getDate(d.split(",")[1]));
+        try {
+            for (String d : data) {
+                gui.addRow(CourierDBM.database.getVoucher(MyUtils.stringToInt(d.split(",")[0])).getName(), MyUtils.getDate(d.split(",")[1]));
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Error: " + e);
         }
         
         gui.sort();

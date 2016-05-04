@@ -5,9 +5,12 @@
  */
 package org.riflemansd.courierdb.gui.test;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import org.riflemansd.courierdb.CourierDBM;
+import org.riflemansd.courierdb.entrys.dbs.DistributorS;
 import org.riflemansd.courierdb.entrys.dbs.PackageInS;
 import org.riflemansd.courierdb.entrys.dbs.VoucherS;
 import org.riflemansd.courierdb.utils.MyUtils;
@@ -16,13 +19,15 @@ import org.riflemansd.courierdb.utils.MyUtils;
  *
  * @author RiflemanSD
  */
-public class Aparadota extends javax.swing.JPanel {
+public class Aparadota extends javax.swing.JPanel implements KeyListener {
 
     /**
      * Creates new form Aparadota
      */
     public Aparadota() {
         initComponents();
+        
+        this.voucherIDTF.addKeyListener(this);
     }
 
     /**
@@ -109,7 +114,8 @@ public class Aparadota extends javax.swing.JPanel {
         CourierDBM.database.saveVoucher(new VoucherS(voucherId, -1, -1, false));
         int id = CourierDBM.database.getVoucher(voucherId).getId();
         System.out.println(id);
-        CourierDBM.database.savePackageIn(new PackageInS(id, MyUtils.dateToString(date)));
+        DistributorS dist = CourierDBM.database.getDistributor(0);
+        CourierDBM.database.savePackageIn(new PackageInS(id, dist.getId(), MyUtils.dateToString(date)));
         this.voucherIDTF.setText("");
     }//GEN-LAST:event_kataxwrisiButtonActionPerformed
 
@@ -120,4 +126,28 @@ public class Aparadota extends javax.swing.JPanel {
     private javax.swing.JButton kataxwrisiButton;
     private javax.swing.JTextField voucherIDTF;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+//        System.out.println(e.getKeyCode());
+//        new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+//        System.out.println(e.getKeyCode());
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if (this.voucherIDTF.hasFocus()) System.out.println("LOL");
+        if (e.getKeyCode() == 10) {
+            //System.out.println("Enter");
+            this.kataxwrisiButton.doClick();
+        } else if (e.getKeyCode() == 27) {
+            this.cancelButton.doClick();
+        }
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

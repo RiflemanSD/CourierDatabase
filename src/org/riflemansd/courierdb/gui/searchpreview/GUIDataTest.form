@@ -57,9 +57,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="&#x3a0;&#x3af;&#x3bd;&#x3b1;&#x3ba;&#x3b1;&#x3c2; &#x391;&#x3c0;&#x3bf;&#x3c4;&#x3b5;&#x3bb;&#x3b5;&#x3c3;&#x3bc;&#x3ac;&#x3c4;&#x3c9;&#x3bd;">
-              <Color PropertyName="color" blue="0" green="0" id="black" palette="1" red="0" type="palette"/>
-            </TitledBorder>
+            <TitledBorder title="&#x3a0;&#x3af;&#x3bd;&#x3b1;&#x3ba;&#x3b1;&#x3c2; &#x391;&#x3c0;&#x3bf;&#x3c4;&#x3b5;&#x3bb;&#x3b5;&#x3c3;&#x3bc;&#x3ac;&#x3c4;&#x3c9;&#x3bd;"/>
           </Border>
         </Property>
       </Properties>

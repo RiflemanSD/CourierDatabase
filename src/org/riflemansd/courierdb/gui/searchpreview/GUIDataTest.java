@@ -1,6 +1,7 @@
 package org.riflemansd.courierdb.gui.searchpreview;
 
 import java.awt.BorderLayout;
+import java.awt.event.MouseAdapter;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -24,9 +25,9 @@ public class GUIDataTest extends javax.swing.JFrame {
     private String[] columnNames;
     private Object[] columnClasses;
     
-    private JXSortableTable table;
+    public JXSortableTable table;
     private SearchPanel sPanel;
-    private int currSelectedRow;
+    public int currSelectedRow;
 
     /**
      * Creates new form GUIDataTest
@@ -92,6 +93,10 @@ public class GUIDataTest extends javax.swing.JFrame {
     
     public void sort() {
         this.table.sort();
+    }
+    
+    public void addMyMouseListener(MouseAdapter a) {
+        this.addMouseListener(a);
     }
     
     /**
