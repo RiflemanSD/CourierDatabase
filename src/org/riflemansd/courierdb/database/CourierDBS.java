@@ -190,9 +190,12 @@ public class CourierDBS {
      * @return 
      */
     public String[] getVouchersByRTime(String time) {
-        String[] vouchers = new String[4];
+        System.out.println("I AM RUNNING");
+        String result = manager.select("packagein","voucherid,distributorid,time", "time LIKE '" + time + "%'", 3);
         
-        return vouchers;
+        System.out.println(result);
+        
+        return null;
     }
 //    public String[] getVouchersByDistributor(String name) {
 //        

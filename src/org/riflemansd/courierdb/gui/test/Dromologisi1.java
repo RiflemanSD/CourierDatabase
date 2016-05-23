@@ -5,6 +5,7 @@
  */
 package org.riflemansd.courierdb.gui.test;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -20,19 +21,15 @@ import org.riflemansd.courierdb.utils.MyUtils;
  * @author RiflemanSD
  */
 public class Dromologisi1 extends javax.swing.JPanel {
-
+    DianomeasPanel dianomeasPanel1;
     /**
      * Creates new form Dromologisi
      */
     public Dromologisi1() {
         initComponents();
         
-        this.jComboBox1.removeAllItems();
-        
-        String[] dists = CourierDBM.database.getDistributors();
-        for (String d : dists) {
-            this.jComboBox1.addItem(d.split(",")[0] + ", " + d.split(",")[1]);
-        }
+        dianomeasPanel1 = new DianomeasPanel();
+        this.jPanel1.add(dianomeasPanel1, BorderLayout.CENTER);
     }
 
     /**
@@ -44,21 +41,12 @@ public class Dromologisi1 extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
         kataxwrisiButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         voucherID = new javax.swing.JTextField();
         cancelButton = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("ID:");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Διανομέας");
+        jPanel1 = new javax.swing.JPanel();
 
         kataxwrisiButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         kataxwrisiButton.setText("Καταχώρηση");
@@ -76,50 +64,33 @@ public class Dromologisi1 extends javax.swing.JPanel {
         cancelButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cancelButton.setText("Ακύρωση");
 
-        jComboBox1.setEditable(true);
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(kataxwrisiButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(voucherID, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(voucherID, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -134,8 +105,7 @@ public class Dromologisi1 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void kataxwrisiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kataxwrisiButtonActionPerformed
-        String sdist = (String)this.jComboBox1.getSelectedItem();
-        DistributorS dist = new DistributorS(MyUtils.stringToInt(sdist.split(", ")[0]), sdist.split(", ")[1]);
+        DistributorS dist = new DistributorS(this.dianomeasPanel1.getCurrID(), this.dianomeasPanel1.getCurrName());
         
         String voucherId = this.voucherID.getText();
         if (voucherId.isEmpty())  {
@@ -155,15 +125,16 @@ public class Dromologisi1 extends javax.swing.JPanel {
             if (a == 1) return;
         }
         VoucherS voucher = CourierDBM.database.getVoucher(voucherId);
+        int id = -1;
         if (voucher == null) {
             CourierDBM.database.saveVoucher(new VoucherS(voucherId));
-            int id = CourierDBM.database.getVoucher(voucherId).getId();
+            id = CourierDBM.database.getVoucher(voucherId).getId();
             System.out.println(id);
         }
         else {
-            
+            id = voucher.getId();
         }
-        //CourierDBM.database.savePackageIn(new PackageInS(id, MyUtils.dateToString(date)));
+        CourierDBM.database.savePackageIn(new PackageInS(id, dist.getdID()-1, MyUtils.dateToString(date)));
         this.voucherID.setText("");
         
         System.out.println(dist.getdID() + " " + dist.getName() + " " + voucherID);
@@ -172,12 +143,9 @@ public class Dromologisi1 extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton kataxwrisiButton;
     private javax.swing.JTextField voucherID;
     // End of variables declaration//GEN-END:variables

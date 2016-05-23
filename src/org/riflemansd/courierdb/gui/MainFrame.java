@@ -6,6 +6,7 @@
 package org.riflemansd.courierdb.gui;
 
 import java.awt.BorderLayout;
+import org.riflemansd.courierdb.CourierDBM;
 import org.riflemansd.courierdb.gui.test.Aparadota;
 import org.riflemansd.courierdb.gui.test.Dromologisi;
 import org.riflemansd.courierdb.gui.test.Dromologisi1;
@@ -184,6 +185,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         Test2 t = new Test2();
+        CourierDBM.database.getVouchersByRTime("09-05-2016");
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
