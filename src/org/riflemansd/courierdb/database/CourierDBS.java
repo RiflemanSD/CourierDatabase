@@ -63,6 +63,16 @@ public class CourierDBS {
         
         return new DistributorS(id, dID, name);
     }
+    public DistributorS getDistributorByID(int id) {
+        String result = manager.select("distributor", "id,did,name", "id = '" + id + "'", 3);
+        if (result.length() == 0) return null;
+        
+        String[] r = result.split(",");
+        int did = MyUtils.stringToInt(r[1]);
+        String name = r[2];
+        
+        return new DistributorS(id, did, name);
+    }
     public String[] getDistributors() {
         String result = manager.select("distributor", "did,name", "", 2);
         System.out.println(result);
@@ -87,7 +97,6 @@ public class CourierDBS {
             manager.insert("voucher","voucherid,codcash,chargecash,isreceipt", name, cash, charge, isrs);
         }
         
-        System.out.println("true");
         return true;
     }
     public VoucherS getVoucher(int id) {
@@ -98,8 +107,8 @@ public class CourierDBS {
         String[] r = result.split(",");
         
         String voucherid = r[1];
-        double cod = -1; if (!r[1].equals("NULL")) cod = MyUtils.stringToDouble(r[2]);
-        double charge = -1; if (!r[2].equals("NULL")) cod = MyUtils.stringToDouble(r[3]);
+        double cod = -1; if (!r[2].equals("NULL")) cod = MyUtils.stringToDouble(r[2]);
+        double charge = -1; if (!r[3].equals("NULL")) charge = MyUtils.stringToDouble(r[3]);
         boolean isr = MyUtils.stringToBoolean(r[4]);
         
         VoucherS v = new VoucherS(id, voucherid, cod, charge, isr);
@@ -114,12 +123,12 @@ public class CourierDBS {
         String[] r = result.split(",");
         
         int id = MyUtils.stringToInt(r[0]);
-        double cod = -1; if (!r[1].equals("NULL")) cod = MyUtils.stringToDouble(r[2]);
-        double charge = -1; if (!r[2].equals("NULL")) cod = MyUtils.stringToDouble(r[3]);
+        double cod = -1; if (!r[2].equals("NULL")) cod = MyUtils.stringToDouble(r[2]);
+        double charge = -1; if (!r[3].equals("NULL")) charge = MyUtils.stringToDouble(r[3]);
         boolean isr = MyUtils.stringToBoolean(r[4]);
         
         VoucherS v = new VoucherS(id, voucherid, cod, charge, isr);
-        System.out.println(v);
+        //System.out.println(v);
         return v;
     }
     
@@ -190,12 +199,12 @@ public class CourierDBS {
      * @return 
      */
     public String[] getVouchersByRTime(String time) {
-        System.out.println("I AM RUNNING");
-        String result = manager.select("packagein","voucherid,distributorid,time", "time LIKE '" + time + "%'", 3);
+        System.out.println("I AM RUNNING" + " t: " + time);
+        String result = manager.select("packageout","voucherid,distributorid,rtime", "time LIKE '" + time + "%'", 3);
         
         System.out.println(result);
         
-        return null;
+        return result.split("\n");
     }
 //    public String[] getVouchersByDistributor(String name) {
 //        

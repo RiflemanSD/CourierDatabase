@@ -88,4 +88,6 @@ public class Test4 extends MouseAdapter {
             popup.show(e.getComponent(), e.getX(), e.getY());
         }
     }
+
+
 }

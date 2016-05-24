@@ -10,6 +10,7 @@ import org.riflemansd.courierdb.CourierDBM;
 import org.riflemansd.courierdb.entrys.dbs.DistributorS;
 import org.riflemansd.courierdb.entrys.dbs.PackageOutS;
 import org.riflemansd.courierdb.entrys.dbs.VoucherS;
+import org.riflemansd.courierdb.gui.searchpreview.GUIDataTestPanelNosearch;
 import org.riflemansd.courierdb.utils.MyUtils;
 
 /**
@@ -17,12 +18,27 @@ import org.riflemansd.courierdb.utils.MyUtils;
  * @author RiflemanSD
  */
 public class Kataxorisi extends javax.swing.JPanel {
-
+    private String voucherBuffer;
+    private String codBuffer;
+    private NewJFrame gui;
+    
+    
     /**
      * Creates new form Kataxorisi
      */
     public Kataxorisi() {
         initComponents();
+        
+        this.gui = null;
+        this.voucherBuffer = "";
+        this.codBuffer = "";
+    }
+    public Kataxorisi(NewJFrame gui) {
+        initComponents();
+        
+        this.gui = gui;
+        this.voucherBuffer = "";
+        this.codBuffer = "";
     }
 
     /**
@@ -42,17 +58,12 @@ public class Kataxorisi extends javax.swing.JPanel {
         chargeTF = new javax.swing.JTextField();
         datePicker = new org.riflemansd.courierdb.gui.DatePicker();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        distNameTF = new javax.swing.JTextField();
-        distIDTF = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         receiptB = new javax.swing.JCheckBox();
+        dianomeasPanel1 = new org.riflemansd.courierdb.gui.test.DianomeasPanel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Voucher:");
@@ -64,12 +75,22 @@ public class Kataxorisi extends javax.swing.JPanel {
                 voucherIDTFActionPerformed(evt);
             }
         });
+        voucherIDTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                voucherIDTFKeyReleased(evt);
+            }
+        });
 
         codTF.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         codTF.setPreferredSize(new java.awt.Dimension(6, 25));
         codTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 codTFActionPerformed(evt);
+            }
+        });
+        codTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                codTFKeyReleased(evt);
             }
         });
 
@@ -86,33 +107,14 @@ public class Kataxorisi extends javax.swing.JPanel {
                 chargeTFActionPerformed(evt);
             }
         });
+        chargeTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                chargeTFKeyReleased(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Ημερομηνεία:");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Διανομέας");
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("ID:");
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Όνομα:");
-
-        distNameTF.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        distNameTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                distNameTFActionPerformed(evt);
-            }
-        });
-
-        distIDTF.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        distIDTF.setPreferredSize(new java.awt.Dimension(6, 25));
-        distIDTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                distIDTFActionPerformed(evt);
-            }
-        });
 
         okButton.setText("OK");
         okButton.addActionListener(new java.awt.event.ActionListener() {
@@ -133,10 +135,6 @@ public class Kataxorisi extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(distIDTF, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jSeparator1)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -156,37 +154,22 @@ public class Kataxorisi extends javax.swing.JPanel {
                             .addGap(18, 18, 18)
                             .addComponent(datePicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(distNameTF, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(okButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelButton))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(receiptB, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(receiptB, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dianomeasPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(distIDTF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(distNameTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(10, 10, 10)
+                .addComponent(dianomeasPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -228,17 +211,9 @@ public class Kataxorisi extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_chargeTFActionPerformed
 
-    private void distNameTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_distNameTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_distNameTFActionPerformed
-
-    private void distIDTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_distIDTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_distIDTFActionPerformed
-
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        int did = MyUtils.stringToInt(this.distIDTF.getText());
-        String distname = this.distNameTF.getText();
+        int did = this.dianomeasPanel1.getCurrID();
+        String distname = this.dianomeasPanel1.getCurrName();
         
         String voucherID = this.voucherIDTF.getText();
         double cod = MyUtils.stringToDouble(this.codTF.getText());
@@ -247,9 +222,11 @@ public class Kataxorisi extends javax.swing.JPanel {
         String rtime = MyUtils.dateToString(this.datePicker.getDate());
         boolean receipt = this.receiptB.isSelected();
         
-        DistributorS dist = new DistributorS(did, distname);
-        CourierDBM.database.saveDistributor(dist);
-        dist = CourierDBM.database.getDistributor(did);
+        insertData(did, distname, voucherID, cod, charge, time, rtime, receipt);
+    }//GEN-LAST:event_okButtonActionPerformed
+
+    private void insertData(int did, String distname, String voucherID, double cod, double charge, String time, String rtime, boolean receipt) {
+        DistributorS dist = CourierDBM.database.getDistributor(did);
         int distid = dist.getId();
         
         VoucherS voucher = new VoucherS(voucherID, cod, charge, receipt);
@@ -259,26 +236,116 @@ public class Kataxorisi extends javax.swing.JPanel {
         
         PackageOutS out = new PackageOutS(0, vid, distid, time, rtime);
         CourierDBM.database.savePackageOut(out);
-    }//GEN-LAST:event_okButtonActionPerformed
+        
+        if (gui != null) gui.defineData();
+    }
+    
+    private void voucherIDTFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_voucherIDTFKeyReleased
+        if (evt.getKeyCode() == 10) {
+            String voucher = this.voucherIDTF.getText();
+            System.out.println(voucher);
+            
+            if (voucher.length() == 12) {
+                this.voucherBuffer = voucher;
+            }
+            
+            this.codTF.requestFocus();
+        }
+        else {
+            
+        }
+        
+    }//GEN-LAST:event_voucherIDTFKeyReleased
 
+    private void codTFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codTFKeyReleased
+        if (evt.getKeyCode() == 10) {
+            String scod = this.codTF.getText();
+            System.out.println(scod);
+            
+            double cod = toCod(scod);
+            if (cod == -2) {
+                int did = this.dianomeasPanel1.getCurrID();
+                String distname = this.dianomeasPanel1.getCurrName();
 
+                String time = MyUtils.dateToString(new Date());
+                String rtime = MyUtils.dateToString(this.datePicker.getDate());
+                boolean receipt = this.receiptB.isSelected();
+        
+                voucherBuffer = scod;
+                this.voucherIDTF.setText(scod);
+                this.codTF.setText("");
+                
+                insertData(did, distname, voucherBuffer, 0, 0, time, rtime, receipt);
+            }
+            else {
+                this.chargeTF.requestFocus();
+            }
+        }
+        else {
+            try {
+                this.codBuffer += "" + evt.getKeyChar();
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_codTFKeyReleased
+
+    private void chargeTFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chargeTFKeyReleased
+        if (evt.getKeyCode() == 10) {
+            int did = this.dianomeasPanel1.getCurrID();
+            String distname = this.dianomeasPanel1.getCurrName();
+
+            String voucherID = this.voucherIDTF.getText();
+            double cod = toCod(this.codTF.getText());
+            double charge = toCod(this.chargeTF.getText());
+            String time = MyUtils.dateToString(new Date());
+            String rtime = MyUtils.dateToString(this.datePicker.getDate());
+            boolean receipt = this.receiptB.isSelected();
+
+            System.out.println(cod + " " + charge);
+            
+            this.voucherIDTF.setText("");
+            this.codTF.setText("");
+            this.chargeTF.setText("");
+            this.voucherIDTF.requestFocus();
+            
+            insertData(did, distname, voucherID, cod, charge, time, rtime, receipt);
+        }
+    }//GEN-LAST:event_chargeTFKeyReleased
+
+    private double toCod(String cod) {
+        cod = cod.replace(",", ".");
+        
+        if (cod.length() == 0) return 0;
+        
+        if (cod.contains(".") || cod.length() <= 4) {
+            try {
+                return Double.parseDouble(cod);
+            }
+            catch (Exception e) {
+                return -1;
+            }
+        }
+        else {
+            if (cod.length() == 12) return -2;
+            
+            return -1;
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JTextField chargeTF;
     private javax.swing.JTextField codTF;
     private org.riflemansd.courierdb.gui.DatePicker datePicker;
-    private javax.swing.JTextField distIDTF;
-    private javax.swing.JTextField distNameTF;
+    private org.riflemansd.courierdb.gui.test.DianomeasPanel dianomeasPanel1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton okButton;
     private javax.swing.JCheckBox receiptB;
     private javax.swing.JTextField voucherIDTF;

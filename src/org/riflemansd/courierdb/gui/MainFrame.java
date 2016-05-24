@@ -8,10 +8,10 @@ package org.riflemansd.courierdb.gui;
 import java.awt.BorderLayout;
 import org.riflemansd.courierdb.CourierDBM;
 import org.riflemansd.courierdb.gui.test.Aparadota;
-import org.riflemansd.courierdb.gui.test.Dromologisi;
 import org.riflemansd.courierdb.gui.test.Dromologisi1;
 import org.riflemansd.courierdb.gui.test.InsertDistributor;
 import org.riflemansd.courierdb.gui.test.Kataxorisi;
+import org.riflemansd.courierdb.gui.test.NewJFrame;
 import org.riflemansd.courierdb.gui.test.Test;
 import org.riflemansd.courierdb.gui.test.Test2;
 import org.riflemansd.courierdb.gui.test.Test3;
@@ -157,7 +157,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         this.jPanel1.removeAll();
-        this.jPanel1.add(new Kataxorisi(), BorderLayout.CENTER);
+        Kataxorisi kat = new Kataxorisi();
+        this.jPanel1.add(kat, BorderLayout.CENTER);
         
         this.revalidate();
         this.pack();
@@ -165,7 +166,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         this.jPanel1.removeAll();
-        this.jPanel1.add(new Dromologisi(), BorderLayout.CENTER);
+        this.jPanel1.add(new Dromologisi1(), BorderLayout.CENTER);
         
         this.revalidate();
         this.pack();
@@ -193,11 +194,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        this.jPanel1.removeAll();
-        this.jPanel1.add(new Dromologisi1(), BorderLayout.CENTER);
-        
-        this.revalidate();
-        this.pack();
+        NewJFrame f = new NewJFrame();
+        f.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
