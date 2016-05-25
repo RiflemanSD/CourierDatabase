@@ -142,24 +142,6 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         String fileName = "database";
 
-        JFileChooser fc = new JFileChooser();
-        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        //fc.setCurrentDirectory(null);
-
-        int returnVal = fc.showSaveDialog(rootPane);
-        //int returnVal = fc.showOpenDialog(rootPane);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
-
-            System.out.println("Opening: " + file.getAbsolutePath());
-            System.out.println("Opening: " + file.getName());
-            
-            if (!file.getAbsolutePath().equals(file.getName())) {
-                fileName = file.getAbsolutePath();
-            }
-        } else {
-            return;
-        }
         fileName += ".xlsx";
         System.out.println(fileName);
 
@@ -178,7 +160,7 @@ public class NewJFrame extends javax.swing.JFrame {
             Object[] datas = gui.table.getRowAt(i);
 
             int j = 0;
-            datas[0] = Integer.parseInt((String) datas[0]);
+            //datas[0] = Integer.parseInt((String) datas[0]);
             for (Object o : datas) {
                 if (o instanceof Integer) {
                     doc.setDouble(0, i, j, (int) o);
@@ -186,6 +168,8 @@ public class NewJFrame extends javax.swing.JFrame {
                     doc.setDouble(0, i, j, (double) o);
                 } else if (o instanceof Date) {
                     doc.setDate(0, i, j, (Date) o);
+                } else if (o instanceof Boolean) {
+                    doc.setString(0, i, j, MyUtils.booleanToString((boolean)o));
                 } else {
                     doc.setString(0, i, j, (String) o);
                 }
