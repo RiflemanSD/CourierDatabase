@@ -237,7 +237,10 @@ public class Kataxorisi extends javax.swing.JPanel {
         PackageOutS out = new PackageOutS(0, vid, distid, time, rtime);
         CourierDBM.database.savePackageOut(out);
         
-        if (gui != null) gui.defineData();
+        if (gui != null) {
+            gui.defineData();
+//            System.out.println("haha2");
+        }
     }
     
     private void voucherIDTFKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_voucherIDTFKeyReleased

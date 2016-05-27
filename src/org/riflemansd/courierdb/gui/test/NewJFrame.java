@@ -11,7 +11,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -34,6 +36,7 @@ import org.riflemansd.courierdb.utils.OpenProjectFiles;
 public class NewJFrame extends javax.swing.JFrame {
     private String date;
     GUIDataTestPanelNosearch gui;
+    GUIDataTestPanelNosearch gui2;
     /**
      * Creates new form NewJFrame
      */
@@ -42,17 +45,28 @@ public class NewJFrame extends javax.swing.JFrame {
         
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
-        gui = new GUIDataTestPanelNosearch("VoucherID,Αντικαταβολή,Χρέωση,Διανομέας,Παραλαβή,Ημερομηνεία", "s",1.0,1.0,"s",true,new Date());
+        gui2 = new GUIDataTestPanelNosearch("Διανομέας,Σύνολο,Παραδόσεις,Παραλαβές", "s", 1.0, 1, 1);
         this.date = "24-05-2016";
         
-        gui.setTitleName("Ημερομηνεία: " + date);
-        defineData();
+        gui2.setTitleName("Χρήματα Διανομέων");
         
-        this.jPanel1.add(gui, BorderLayout.CENTER);
+        this.jPanel1.add(gui2, BorderLayout.CENTER);
+        
+        this.jPanel2.setLayout(new BorderLayout());
+        
+        gui = new GUIDataTestPanelNosearch("VoucherID,Αντικαταβολή,Χρέωση,Διανομέας,Παραλαβή,Ημερομηνεία", "s",1.0,1.0,"s",true,new Date());
+        gui.setTitleName("Ημερομηνεία: " + date);
+        
+        this.jPanel2.add(gui, BorderLayout.CENTER);
+        
+        defineData();
     }
     
     public void defineData() {
         gui.clear();
+        HashMap<String, Double> cods = new HashMap<>();
+        HashMap<String, Integer> paradoseis = new HashMap<>();
+        HashMap<String, Integer> paralabes = new HashMap<>();
         
         String[] data = CourierDBM.database.getVouchersByRTime(this.date);
         
@@ -65,12 +79,35 @@ public class NewJFrame extends javax.swing.JFrame {
             int distId = MyUtils.stringToInt(line[1]); //distid
             DistributorS dist = CourierDBM.database.getDistributorByID(distId);
             
+            String n = dist.getName();
+            Double c = voucher.getCodcash() + voucher.getChargecash();
+            if (cods.containsKey(n)) cods.put(n, cods.get(n) + c);
+            else cods.put(n, c);
+            
+            if (voucher.isReceipt()) {
+                if (paralabes.containsKey(n)) paralabes.put(n, paralabes.get(n) + 1);
+                else paralabes.put(n, 1);
+            }
+            else {
+                if (paradoseis.containsKey(n)) paradoseis.put(n, paradoseis.get(n) + 1);
+                else paradoseis.put(n, 1);
+            }
+            
             String vdate = line[2];
             
             gui.addRow(voucher.getName(), voucher.getCodcash(), voucher.getChargecash(), dist.getName(), voucher.isReceipt(), vdate);
         }
-        
         gui.sort();
+        
+        
+        
+        gui2.clear();
+        
+        for (String k : cods.keySet()) {
+            gui2.addRow(k, cods.get(k), paradoseis.get(k), paralabes.get(k));
+        }
+        
+        gui2.sort();
     }
 
     
@@ -83,8 +120,9 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        kataxorisi1 = new org.riflemansd.courierdb.gui.test.Kataxorisi();
+        kataxorisi1 = new org.riflemansd.courierdb.gui.test.Kataxorisi(this);
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -95,6 +133,17 @@ public class NewJFrame extends javax.swing.JFrame {
         kataxorisi1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel1.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         jMenu1.setText("File");
 
@@ -121,7 +170,9 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(kataxorisi1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -129,10 +180,13 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(kataxorisi1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 39, Short.MAX_VALUE)))
+                        .addGap(0, 294, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -145,42 +199,118 @@ public class NewJFrame extends javax.swing.JFrame {
         fileName += ".xlsx";
         System.out.println(fileName);
 
-        int numberOfColumns = gui.table.getColumnCount();
+        HashMap<String, Double> cods = new HashMap<>();
+        HashMap<String, Double> charges = new HashMap<>();
+        ArrayList<String> paradoseis = new ArrayList<>();
+        ArrayList<String> paralabes = new ArrayList<>();
+        double sum = 0;
+        int par = 0;
+        int pal = 0;
+        
         int numberOfRows = gui.table.getRowCount();
 
         MyExcelDocument doc = new MyExcelDocument(fileName);
 
-        for (int i = 0; i < numberOfColumns; i++) {
-            String header = (String) gui.table.getColumn(i).getHeaderValue();
-
-            doc.setHeader(0, 0, i, header);
-        }
-
         for (int i = 1; i < numberOfRows; i++) {
             Object[] datas = gui.table.getRowAt(i);
 
-            int j = 0;
-            //datas[0] = Integer.parseInt((String) datas[0]);
-            for (Object o : datas) {
-                if (o instanceof Integer) {
-                    doc.setDouble(0, i, j, (int) o);
-                } else if (o instanceof Number) {
-                    doc.setDouble(0, i, j, (double) o);
-                } else if (o instanceof Date) {
-                    doc.setDate(0, i, j, (Date) o);
-                } else if (o instanceof Boolean) {
-                    doc.setString(0, i, j, MyUtils.booleanToString((boolean)o));
-                } else {
-                    doc.setString(0, i, j, (String) o);
-                }
-                j++;
+            String voucherid = (String) datas[0];
+            double cod = (double) datas[1];
+            double charge = (double) datas[2];
+            boolean rec = (boolean) datas[4];
+            
+            if (cod == 0 && charge == 0) {
+                if (rec) {paralabes.add(voucherid);}
+                else {paradoseis.add(voucherid);}
             }
+            if (cod != 0) {
+                cods.put(voucherid, cod);
+                sum += cod;
+            }
+            if (charge != 0) {
+                charges.put(voucherid, charge);
+                sum += charge;
+            }
+            if (rec) pal++;
+            else par++;
+            
+            System.out.println(voucherid + " " + cod + " " + charge + " " + rec);
         }
-        for (int i = 0; i < numberOfRows; i++) {
+        doc.setHeader(0, 0, 0, "Παραδόσεις " + date, 20, true);
+        doc.mergeCells(0, 0, 0, 4);
+        
+        int i = 1, j = 0;
+        if (!cods.isEmpty()) {
+            doc.setHeader(0, i, 0, "Αντικαταβολές", 14, true);
+            doc.mergeCells(i, i, j, j+1);
+            i++;
+        }
+        for (String k : cods.keySet()) {
+            
+            if (i > 40) {
+                i = 1;
+                j = 2;
+            }
+            
+            doc.setString(0, i, j, k);
+            doc.setDouble(0, i, j+1, cods.get(k), "0.00 €");
+            i++;
+        }
+        if (!charges.isEmpty()) {
+            doc.setHeader(0, i, 0, "Χρεώσεις", 14, true);
+            doc.mergeCells(i, i, j, j+1);
+            i++;
+        }
+        for (String k : charges.keySet()) {
+            
+            if (i > 40) {
+                i = 1;
+                j = 2;
+            }
+            
+            doc.setString(0, i, j, k);
+            doc.setDouble(0, i, j+1, charges.get(k), "0.00 €");
+            i++;
+        }
+        if (!paradoseis.isEmpty()) {
+            doc.setHeader(0, i, 0, "Παραδόσεις", 14, true);
+            doc.mergeCells(i, i, j, j+1);
+            i++;
+        }
+        for (String k : paradoseis) {
+            
+            if (i > 40) {
+                i = 1;
+                j = 2;
+            }
+            
+            doc.setString(0, i, j, k);
+            i++;
+        }
+        if (!paralabes.isEmpty()) {
+            doc.setHeader(0, i, 0, "Παραλαβές", 14, true);
+            doc.mergeCells(i, i, j, j+1);
+            i++;
+        }
+        
+        for (String k : paralabes) {
+            
+            if (i > 40) {
+                i = 1;
+                j = 2;
+            }
+            
+            doc.setString(0, i, j, k);
+            i++;
+        }
+        
+        doc.setHeader(0, 45, 0, "Σύνολο: ", 14, true);
+        doc.setDouble(0, 45, 1, sum, "0.00 €");
+        
+        for (i = 0; i < 4; i++) {
             doc.autoFillColumhWidth(0, i);
         }
         doc.save();
-
         OpenProjectFiles.openFile(fileName);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -225,6 +355,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private org.riflemansd.courierdb.gui.test.Kataxorisi kataxorisi1;
     // End of variables declaration//GEN-END:variables
 
