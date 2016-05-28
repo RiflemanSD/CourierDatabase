@@ -209,7 +209,8 @@ public class NewJFrame extends javax.swing.JFrame {
         
         int numberOfRows = gui.table.getRowCount();
 
-        MyExcelDocument doc = new MyExcelDocument(fileName);
+        MyExcelDocument doc = new MyExcelDocument(fileName, true);
+        
 
         for (int i = 1; i < numberOfRows; i++) {
             Object[] datas = gui.table.getRowAt(i);
@@ -237,12 +238,12 @@ public class NewJFrame extends javax.swing.JFrame {
             System.out.println(voucherid + " " + cod + " " + charge + " " + rec);
         }
         doc.setHeader(0, 0, 0, "Παραδόσεις " + date, 20, true);
-        doc.mergeCells(0, 0, 0, 4);
+        doc.mergeCells(0, 0, 0, 0, 4);
         
         int i = 1, j = 0;
         if (!cods.isEmpty()) {
             doc.setHeader(0, i, 0, "Αντικαταβολές", 14, true);
-            doc.mergeCells(i, i, j, j+1);
+            doc.mergeCells(0, i, i, j, j+1);
             i++;
         }
         for (String k : cods.keySet()) {
@@ -254,11 +255,13 @@ public class NewJFrame extends javax.swing.JFrame {
             
             doc.setString(0, i, j, k);
             doc.setDouble(0, i, j+1, cods.get(k), "0.00 €");
+            doc.addBorders(0, i, j);
+            doc.addBorders(0, i, j+1);
             i++;
         }
         if (!charges.isEmpty()) {
             doc.setHeader(0, i, 0, "Χρεώσεις", 14, true);
-            doc.mergeCells(i, i, j, j+1);
+            doc.mergeCells(0, i, i, j, j+1);
             i++;
         }
         for (String k : charges.keySet()) {
@@ -274,7 +277,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
         if (!paradoseis.isEmpty()) {
             doc.setHeader(0, i, 0, "Παραδόσεις", 14, true);
-            doc.mergeCells(i, i, j, j+1);
+            doc.mergeCells(0, i, i, j, j+1);
             i++;
         }
         for (String k : paradoseis) {
@@ -289,7 +292,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
         if (!paralabes.isEmpty()) {
             doc.setHeader(0, i, 0, "Παραλαβές", 14, true);
-            doc.mergeCells(i, i, j, j+1);
+            doc.mergeCells(0, i, i, j, j+1);
             i++;
         }
         
@@ -304,8 +307,11 @@ public class NewJFrame extends javax.swing.JFrame {
             i++;
         }
         
-        doc.setHeader(0, 45, 0, "Σύνολο: ", 14, true);
-        doc.setDouble(0, 45, 1, sum, "0.00 €");
+        doc.setRowHeight(0, 43, 20);
+        doc.setHeader(0, 45, 0, "Σύνολο: ", 16, true);
+        doc.setDouble(0, 45, 1, sum, "0.00 €", 16, true);
+        doc.setHeader(0, 45, 2, "Παραδόσεις: " + par, 12, false);
+        doc.setHeader(0, 45, 3, "Παραλαβές: " + pal, 12, false);
         
         for (i = 0; i < 4; i++) {
             doc.autoFillColumhWidth(0, i);

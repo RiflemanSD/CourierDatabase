@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -54,6 +55,28 @@ public class MyExcelDocument {
         }
         try {
             workbook = WorkbookFactory.create(infile);
+        } catch (IOException ex) {
+            Logger.getLogger(MyExcelDocument.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidFormatException ex) {
+            Logger.getLogger(MyExcelDocument.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (EncryptedDocumentException ex) {
+            Logger.getLogger(MyExcelDocument.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public MyExcelDocument(String fileName, boolean rewrite) {
+        file = new File(fileName);
+        //createFile();
+        if (!file.exists()) this.createNewXLSX(fileName);
+        
+        try {
+            infile = new FileInputStream(file);
+            //outfile = new FileOutputStream(file);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MyExcelDocument.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            workbook = WorkbookFactory.create(infile);
+            if (rewrite) workbook.removeSheetAt(0);
         } catch (IOException ex) {
             Logger.getLogger(MyExcelDocument.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvalidFormatException ex) {
@@ -162,6 +185,19 @@ public class MyExcelDocument {
         org.apache.poi.ss.usermodel.Cell cell = getCell(nsheet, nrow, ncolumn);
         cell.setCellValue(number);
     }
+    public void setDouble(int nsheet, int nrow, int ncolumn, double number, String formulla, int size, boolean bold) {
+        org.apache.poi.ss.usermodel.Cell cell = getCell(nsheet, nrow, ncolumn);
+        cell.setCellValue(number);
+        Font font = workbook.createFont();
+        if (bold) font.setBoldweight(Font.BOLDWEIGHT_BOLD);
+        CellStyle style = workbook.createCellStyle();
+        font.setFontHeightInPoints((short)size);
+        style.setFont(font);
+        DataFormat format = workbook.createDataFormat();
+        style.setDataFormat(format.getFormat(formulla));
+        
+        cell.setCellStyle(style);
+    }
     
     public void setDouble(int nsheet, int nrow, int ncolumn, double number, String formulla) {
         org.apache.poi.ss.usermodel.Cell cell = getCell(nsheet, nrow, ncolumn);
@@ -174,13 +210,36 @@ public class MyExcelDocument {
         cell.setCellStyle(style);
     }
     
-    public void mergeCells(int firstRow, int lastRow, int firstCol, int lastCol) {
-        Sheet sheet = workbook.getSheetAt(0);
+    public void mergeCells(int nsheet, int firstRow, int lastRow, int firstCol, int lastCol) {
+        Sheet sheet = workbook.getSheetAt(nsheet);
         
         sheet.addMergedRegion(new CellRangeAddress(firstRow, lastRow, firstCol, lastCol));
     }
     
+    public void setRowHeight(int nsheet, int nrow, int height) {
+        Sheet sheet = workbook.getSheetAt(nsheet);
+        
+        Row row = sheet.getRow(nrow);
+        if (row == null) row = sheet.createRow(nrow);
+        
+        row.setHeightInPoints(height);
+    }
     
+    public void addBorders(int nsheet, int nrow, int ncol) {
+        Cell cell = getCell(nsheet, nrow, ncol);
+                
+        // Style the cell with borders all around.
+        CellStyle style = workbook.createCellStyle();
+        style.setBorderBottom(CellStyle.BORDER_THIN);
+        style.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+        style.setBorderLeft(CellStyle.BORDER_THIN);
+        style.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+        style.setBorderRight(CellStyle.BORDER_THIN);
+        style.setRightBorderColor(IndexedColors.BLACK.getIndex());
+        style.setBorderTop(CellStyle.BORDER_THIN);
+        style.setTopBorderColor(IndexedColors.BLACK.getIndex());
+        cell.setCellStyle(style);
+    }
     
     public Date getDate(int nsheet, int nrow, int ncolumn) {
         Date value;
