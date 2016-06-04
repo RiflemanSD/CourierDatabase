@@ -6,6 +6,7 @@
 package org.riflemansd.courierdb.gui.searchpreview;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -59,8 +60,17 @@ public class GUIDataTestPanelNosearch extends javax.swing.JPanel {
 //        defineData();
     }
 
+    public void autoResizeColumn(int col) {
+        table.getColumn(col).sizeWidthToFit();
+    }
+    
     public void setTitleName(String title) {
         TitledBorder t = (TitledBorder) this.tablePanel.getBorder();
+        t.setTitle(title);
+    }
+    public void setTitleName(String title, Color color) {
+        TitledBorder t = (TitledBorder) this.tablePanel.getBorder();
+        t.setTitleColor(color);
         t.setTitle(title);
     }
     
@@ -110,7 +120,7 @@ public class GUIDataTestPanelNosearch extends javax.swing.JPanel {
         tablePanel.setLayout(tablePanelLayout);
         tablePanelLayout.setHorizontalGroup(
             tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 388, Short.MAX_VALUE)
+            .addGap(0, 391, Short.MAX_VALUE)
         );
         tablePanelLayout.setVerticalGroup(
             tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

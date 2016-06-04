@@ -33,14 +33,14 @@ import org.riflemansd.courierdb.utils.OpenProjectFiles;
  *
  * @author RiflemanSD
  */
-public class NewJFrame extends javax.swing.JFrame {
+public class Tameio extends javax.swing.JFrame {
     private String date;
     GUIDataTestPanelNosearch gui;
     GUIDataTestPanelNosearch gui2;
     /**
      * Creates new form NewJFrame
      */
-    public NewJFrame() {
+    public Tameio() {
         initComponents();
         
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -120,7 +120,7 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        kataxorisi1 = new org.riflemansd.courierdb.gui.test.Kataxorisi(this);
+        kataxorisi1 = new org.riflemansd.courierdb.gui.test.Kataxorisi();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -337,20 +337,21 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tameio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tameio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tameio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tameio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewJFrame().setVisible(true);
+                new Tameio().setVisible(true);
             }
         });
     }

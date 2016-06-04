@@ -11,10 +11,11 @@ import org.riflemansd.courierdb.gui.test.Aparadota;
 import org.riflemansd.courierdb.gui.test.Dromologisi1;
 import org.riflemansd.courierdb.gui.test.InsertDistributor;
 import org.riflemansd.courierdb.gui.test.Kataxorisi;
-import org.riflemansd.courierdb.gui.test.NewJFrame;
+import org.riflemansd.courierdb.gui.test.Tameio;
 import org.riflemansd.courierdb.gui.test.Test;
 import org.riflemansd.courierdb.gui.test.Test2;
 import org.riflemansd.courierdb.gui.test.Test3;
+import org.riflemansd.courierdb.gui.test.main.MainGUI;
 
 /**
  *
@@ -181,7 +182,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        Test t = new Test();
+        MainGUI g = new MainGUI();
+        g.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
@@ -194,7 +196,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        NewJFrame f = new NewJFrame();
+        Tameio f = new Tameio();
         f.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 

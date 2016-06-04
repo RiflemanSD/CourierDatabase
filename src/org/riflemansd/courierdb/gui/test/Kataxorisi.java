@@ -20,7 +20,7 @@ import org.riflemansd.courierdb.utils.MyUtils;
 public class Kataxorisi extends javax.swing.JPanel {
     private String voucherBuffer;
     private String codBuffer;
-    private NewJFrame gui;
+    private Tameio gui;
     
     
     /**
@@ -33,7 +33,7 @@ public class Kataxorisi extends javax.swing.JPanel {
         this.voucherBuffer = "";
         this.codBuffer = "";
     }
-    public Kataxorisi(NewJFrame gui) {
+    public Kataxorisi(Tameio gui) {
         initComponents();
         
         this.gui = gui;

@@ -34,6 +34,14 @@ public class JComboBoxAutoCompletePanel extends javax.swing.JPanel {
         this.add(box, BorderLayout.CENTER);
     }
     
+    public JComboBoxAutoCompletePanel(int wltc, String... words) {
+        initComponents();
+        
+        box = new JBoxAutoCompletePromptFasterWM(wltc, words);
+        //box.addAutoCompleteListener(new AutoCompleteListener());
+        this.add(box, BorderLayout.CENTER);
+    }
+    
     public void setWords(String... words) {
         box.setWords(words);
     }
