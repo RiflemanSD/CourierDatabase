@@ -30,12 +30,12 @@ public final class QuickGUIForm extends javax.swing.JFrame{
         
         initComponents();
         
-        this.addressTF.addAutoCompleteListener(l);
+        this.cityTF.addAutoCompleteListener(l);
         
         initAutoCompletes();
         
         //this.addressTF.setWords(pefka + filiro + asvestohori + xortiatis);
-        this.addressTF.setWords(nameCitys.split("\n"));
+        this.cityTF.setWords(nameCitys.split("\n"));
         
         Date d1 = new Date();d1.setHours(9);d1.setMinutes(0);
         Date d2 = new Date();d2.setHours(14);d2.setMinutes(0);
@@ -53,6 +53,8 @@ public final class QuickGUIForm extends javax.swing.JFrame{
         this.fakelosCheck.setVisible(false);
         
         this.rootPane.setDefaultButton(this.insertButton);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setLocationRelativeTo(null);
     }
      
     public void initAutoCompletes() {
@@ -66,6 +68,8 @@ public final class QuickGUIForm extends javax.swing.JFrame{
         this.citys.add(new City("Ασβεστοχώρι", 57010, "asvestohori.txt", "asvestohori.osm"));
         this.citys.add(new City("Φίλυρο", 57010, "filiro.txt", "filiro.osm"));
         this.citys.add(new City("Χορτιάτης", 57010, "xortiatis.txt", "xortiatis.osm"));
+        
+        
         //this.citys.add(new City("Εξοχή", 57010, "exohi.txt", "exohi.osm"));
         
         /*this.citys.add(new City("Συκιές", 56626, "exohi.txt", "exohi.osm"));
@@ -85,19 +89,20 @@ public final class QuickGUIForm extends javax.swing.JFrame{
         //System.out.println("lol " + word);
         if (word.equals("Πεύκα")) {
             //System.out.println(pefka);
-            this.cityTF.setWords(this.citys.get(0).getStreetNames());
+            this.addressTF.setWords(this.citys.get(0).getStreetNames());
         }
         else if (word.equals("Ασβεστοχώρι")) {
-            this.cityTF.setWords(this.citys.get(1).getStreetNames());
+            this.addressTF.setWords(this.citys.get(1).getStreetNames());
         }
         else if (word.equals("Φίλυρο")) {
-            this.cityTF.setWords(this.citys.get(2).getStreetNames());
+            this.addressTF.setWords(this.citys.get(2).getStreetNames());
         }
         else if (word.equals("Χορτιάτης")) {
-            this.cityTF.setWords(this.citys.get(3).getStreetNames());
+            this.addressTF.setWords(this.citys.get(3).getStreetNames());
         }
         else if (word.equals("Εξοχή")) {
             //this.addressTF.setWords(this.citys.get(4).getStreetNames());
+            
         }
         //else {
             //this.addressTF.setWords((pefka + filiro + asvestohori + xortiatis).split("\n"));
@@ -119,9 +124,9 @@ public final class QuickGUIForm extends javax.swing.JFrame{
         String name = nameTF.getValue();
         String phone = phoneTF.getValue();
         String time = "";
-        if (timeCheck.isSelected()) time += timeFrom.getValue() + "-" + timeTo.getValue();
-        if (orTimeCheck.isSelected() && timeCheck.isSelected()) time += "," + orTimeFrom.getValue() + "-" + orTimeTo.getValue();
-        else if (orTimeCheck.isSelected()) time += orTimeFrom.getValue() + "-" + orTimeTo.getValue();
+        if (timeCheck.isSelected()) time += timeFrom.getValueDate().getHours()+":"+timeFrom.getValueDate().getMinutes() + "-" + timeTo.getValueDate().getHours()+":"+timeTo.getValueDate().getMinutes();
+        if (orTimeCheck.isSelected() && timeCheck.isSelected()) time += "," + orTimeFrom.getValueDate().getHours()+":"+orTimeFrom.getValueDate().getMinutes() + "-" + orTimeTo.getValueDate().getHours()+":"+orTimeTo.getValueDate().getMinutes();
+        else time += time += orTimeFrom.getValueDate().getHours()+":"+orTimeFrom.getValueDate().getMinutes() + "-" + orTimeTo.getValueDate().getHours()+":"+orTimeTo.getValueDate().getMinutes();
         boolean emergency = epeigonCheck.isSelected();
         
         VoucherInfoS voucherinfo = new VoucherInfoS(voucherS.getId(), address, city, name, time, emergency, phone);
@@ -474,11 +479,11 @@ public final class QuickGUIForm extends javax.swing.JFrame{
     }//GEN-LAST:event_addressTFKeyReleased
 
     private void fakelosCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fakelosCheckActionPerformed
-        this.demaCheck.setSelected(false);
+        //this.demaCheck.setSelected(false);
     }//GEN-LAST:event_fakelosCheckActionPerformed
 
     private void demaCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_demaCheckActionPerformed
-        this.fakelosCheck.setSelected(false);
+        //this.fakelosCheck.setSelected(false);
     }//GEN-LAST:event_demaCheckActionPerformed
 
     private void timeCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeCheckActionPerformed

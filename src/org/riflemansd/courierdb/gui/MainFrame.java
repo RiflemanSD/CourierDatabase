@@ -192,7 +192,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        Test3CouriersGUIData t = new Test3CouriersGUIData();
+        //Test3CouriersGUIData t = new Test3CouriersGUIData();
+        
+        QuickGUIForm form = new QuickGUIForm();
+        form.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed

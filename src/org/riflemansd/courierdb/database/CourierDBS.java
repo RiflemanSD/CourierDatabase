@@ -45,10 +45,10 @@ public class CourierDBS {
         
         VoucherInfoS v = getVoucherInfo(voucherid);
         if (v != null) {
-            manager.update("voucher", "name = '" + name + "', address = '" + address + "', city = '" + city + "', postcode = " + postcode + ", county = '" + county + "', country = '" + country + "', time = '" + time + "', emergency = '" + isem + "', phone = '" + phone + "'", "voucherid = " + voucherid);
+            manager.update("voucherinfo", "name = '" + name + "', address = '" + address + "', city = '" + city + "', postcode = " + postcode + ", county = '" + county + "', country = '" + country + "', time = '" + time + "', emergency = '" + isem + "', phone = '" + phone + "'", "voucherid = " + voucherid);
         }
         else {
-            manager.insert("voucherinfo","voucherid,name,address,city,postcode,county,country,time,emergency,phone", voucherid, name, address, city, postcode, county, country, time, emergency,phone);
+            manager.insert("voucherinfo","voucherid,name,address,city,postcode,county,country,time,emergency,phone", voucherid, name, address, city, postcode, county, country, time, isem, phone);
         }
         
         return true;
