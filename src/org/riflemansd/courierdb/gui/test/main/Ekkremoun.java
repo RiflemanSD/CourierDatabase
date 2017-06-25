@@ -40,7 +40,7 @@ public class Ekkremoun extends javax.swing.JPanel {
         gui.clear();
         
         this.date = "24-05-2016";
-        String[] data = CourierDBM.database.getVouchersByRTime(this.date);
+        String[] data = CourierDBM.database.getVouchersByTime(this.date);
         
         for (String d : data) {
             String[] line = d.split(",");

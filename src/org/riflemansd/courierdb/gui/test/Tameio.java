@@ -21,7 +21,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import org.riflemansd.courierdb.CourierDBM;
-import org.riflemansd.courierdb.entrys.dbs.DistributorS;
+import org.riflemansd.courierdb.entrys.dbs.CourierS;
 import org.riflemansd.courierdb.entrys.dbs.VoucherS;
 import org.riflemansd.courierdb.gui.excel.MyExcelDocument;
 import org.riflemansd.courierdb.gui.searchpreview.GUIDataTestPanel;
@@ -68,7 +68,7 @@ public class Tameio extends javax.swing.JFrame {
         HashMap<String, Integer> paradoseis = new HashMap<>();
         HashMap<String, Integer> paralabes = new HashMap<>();
         
-        String[] data = CourierDBM.database.getVouchersByRTime(this.date);
+        String[] data = CourierDBM.database.getVouchersByTime(this.date);
         
         for (String d : data) {
             String[] line = d.split(",");
@@ -77,7 +77,7 @@ public class Tameio extends javax.swing.JFrame {
             VoucherS voucher = CourierDBM.database.getVoucher(voucherid);
             
             int distId = MyUtils.stringToInt(line[1]); //distid
-            DistributorS dist = CourierDBM.database.getDistributorByID(distId);
+            CourierS dist = CourierDBM.database.getCourierByID(distId);
             
             String n = dist.getName();
             Double c = voucher.getCodcash() + voucher.getChargecash();

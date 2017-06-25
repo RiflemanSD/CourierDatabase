@@ -9,12 +9,12 @@ import java.awt.BorderLayout;
 import org.riflemansd.courierdb.CourierDBM;
 import org.riflemansd.courierdb.gui.test.Aparadota;
 import org.riflemansd.courierdb.gui.test.Dromologisi1;
-import org.riflemansd.courierdb.gui.test.InsertDistributor;
+import org.riflemansd.courierdb.gui.test.InsertCourier;
 import org.riflemansd.courierdb.gui.test.Kataxorisi;
 import org.riflemansd.courierdb.gui.test.Tameio;
 import org.riflemansd.courierdb.gui.test.Test;
 import org.riflemansd.courierdb.gui.test.Test2;
-import org.riflemansd.courierdb.gui.test.Test3;
+import org.riflemansd.courierdb.gui.test.Test3CouriersGUIData;
 import org.riflemansd.courierdb.gui.test.main.MainGUI;
 
 /**
@@ -175,7 +175,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         this.jPanel1.removeAll();
-        this.jPanel1.add(new InsertDistributor(), BorderLayout.CENTER);
+        this.jPanel1.add(new InsertCourier(), BorderLayout.CENTER);
         
         this.revalidate();
         this.pack();
@@ -188,11 +188,11 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         Test2 t = new Test2();
-        CourierDBM.database.getVouchersByRTime("09-05-2016");
+        CourierDBM.database.getVouchersByTime("09-05-2016");
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        Test3 t = new Test3();
+        Test3CouriersGUIData t = new Test3CouriersGUIData();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed

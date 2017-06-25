@@ -23,10 +23,10 @@ import org.riflemansd.courierdb.utils.MyUtils;
  *
  * @author RiflemanSD
  */
-public class Test3 extends MouseAdapter {
+public class Test3CouriersGUIData extends MouseAdapter {
     GUIDataTest gui;
     
-    public Test3() {
+    public Test3CouriersGUIData() {
         gui = new GUIDataTest("ID,Όνομα", 1, "s");
         
         gui.setVisible(true);
@@ -38,7 +38,7 @@ public class Test3 extends MouseAdapter {
     public void defineData() {
         gui.clear();
         
-        String[] data = CourierDBM.database.getDistributors();
+        String[] data = CourierDBM.database.getCouriers();
         
         for (String d : data) {
             gui.addRow(MyUtils.stringToInt(d.split(",")[0]), d.split(",")[1]);
@@ -71,11 +71,9 @@ public class Test3 extends MouseAdapter {
                     if (a == 0) {
                         Object[] row = gui.table.getRowAt(gui.currSelectedRow);
                         
-                        int id = -1;
                         int did = (Integer) row[0];
-                        id = CourierDBM.database.getDistributor(did).getId();
                         
-                        CourierDBM.database.delete(0, id);
+                        CourierDBM.database.deleteCourier(did);
                         
                         defineData();
                         JOptionPane.showMessageDialog(gui, "Τα δεδομένα της γραμμής διαγράφτηκαν", "Επιτυχία", JOptionPane.INFORMATION_MESSAGE);

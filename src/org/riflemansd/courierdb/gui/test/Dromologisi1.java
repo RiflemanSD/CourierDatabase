@@ -10,7 +10,7 @@ import java.awt.Color;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import org.riflemansd.courierdb.CourierDBM;
-import org.riflemansd.courierdb.entrys.dbs.DistributorS;
+import org.riflemansd.courierdb.entrys.dbs.CourierS;
 import org.riflemansd.courierdb.entrys.dbs.PackageInS;
 import org.riflemansd.courierdb.entrys.dbs.PackageOutS;
 import org.riflemansd.courierdb.entrys.dbs.VoucherS;
@@ -103,7 +103,7 @@ public class Dromologisi1 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void kataxwrisiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kataxwrisiButtonActionPerformed
-        DistributorS dist = new DistributorS(this.dianomeasPanel1.getCurrID(), this.dianomeasPanel1.getCurrName());
+        CourierS dist = new CourierS(this.dianomeasPanel1.getCurrID(), this.dianomeasPanel1.getCurrName());
         
         String voucherId = this.voucherID.getText();
         if (voucherId.isEmpty())  {

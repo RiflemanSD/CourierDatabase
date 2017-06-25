@@ -1,5 +1,7 @@
 package org.riflemansd.courierdb.database;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -420,17 +422,17 @@ public class SQLiteManager {
         TimeCalc tmain = new TimeCalc();
         tmain.start();
         
-        SQLiteManager db = new SQLiteManager("lakis");
+        SQLiteManager db = new SQLiteManager("db\\lakis");
         
         db.createTable("user", "id,name,address,phone,time", 1, "null", "null", "null", "null");
         
-        /*for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 100; i++) {
             db.insert("user", "name,address,phone", "marios papazisis", "papanikolaou 32", "2310358359");
             db.insert("user", "name,address,phone,time", "xristos mplazis", "papanikolaou 32", "2310358359", "27/5/15");
             db.insert("user", "name,address,phone", "Λαζόπουλος Κώστας", "πηραιά 32", "2310358359");
             db.insert("user", "name,time", "Παπαμανωλάκης Άλεξανδρος", "27/5/15");
             db.insert("user", "address", "περιστέρι 65");
-        }*/
+        }
         
         //String re = db.select("customer", "*", "name like '%ης%'", 4);
         String re = db.select("user", "*", "", 5);

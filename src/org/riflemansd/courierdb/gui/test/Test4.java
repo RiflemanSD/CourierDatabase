@@ -38,7 +38,7 @@ public class Test4 extends MouseAdapter {
     public void defineData() {
         gui.clear();
         
-        String[] data = CourierDBM.database.getDistributors();
+        String[] data = CourierDBM.database.getCouriers();
         
         for (String d : data) {
             gui.addRow(MyUtils.stringToInt(d.split(",")[0]), d.split(",")[1]);
@@ -73,7 +73,7 @@ public class Test4 extends MouseAdapter {
                         
                         int id = -1;
                         int did = (Integer) row[0];
-                        id = CourierDBM.database.getDistributor(did).getId();
+                        id = CourierDBM.database.getCourier(did).getId();
                         
                         CourierDBM.database.delete(0, id);
                         

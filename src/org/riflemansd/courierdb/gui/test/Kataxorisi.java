@@ -7,7 +7,7 @@ package org.riflemansd.courierdb.gui.test;
 
 import java.util.Date;
 import org.riflemansd.courierdb.CourierDBM;
-import org.riflemansd.courierdb.entrys.dbs.DistributorS;
+import org.riflemansd.courierdb.entrys.dbs.CourierS;
 import org.riflemansd.courierdb.entrys.dbs.PackageOutS;
 import org.riflemansd.courierdb.entrys.dbs.VoucherS;
 import org.riflemansd.courierdb.gui.searchpreview.GUIDataTestPanelNosearch;
@@ -226,7 +226,7 @@ public class Kataxorisi extends javax.swing.JPanel {
     }//GEN-LAST:event_okButtonActionPerformed
 
     private void insertData(int did, String distname, String voucherID, double cod, double charge, String time, String rtime, boolean receipt) {
-        DistributorS dist = CourierDBM.database.getDistributor(did);
+        CourierS dist = CourierDBM.database.getCourier(did);
         int distid = dist.getId();
         
         VoucherS voucher = new VoucherS(voucherID, cod, charge, receipt);

@@ -17,7 +17,7 @@ public class DianomeasPanel extends javax.swing.JPanel {
         this.jComboBox1.removeAllItems();
         
         try {
-            String[] dists = CourierDBM.database.getDistributors();
+            String[] dists = CourierDBM.database.getCouriers();
             for (String d : dists) {
                 this.jComboBox1.addItem(d.split(",")[0] + ", " + d.split(",")[1]);
             }

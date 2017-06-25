@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 import java.util.Date;
 import java.util.HashMap;
 import org.riflemansd.courierdb.CourierDBM;
-import org.riflemansd.courierdb.entrys.dbs.DistributorS;
+import org.riflemansd.courierdb.entrys.dbs.CourierS;
 import org.riflemansd.courierdb.entrys.dbs.VoucherS;
 import org.riflemansd.courierdb.gui.searchpreview.GUIDataTestPanelNosearch;
 import org.riflemansd.courierdb.utils.MyUtils;
@@ -40,7 +40,7 @@ public class Simerina extends javax.swing.JPanel {
         gui.clear();
         
         this.date = "24-05-2016";
-        String[] data = CourierDBM.database.getVouchersByRTime(this.date);
+        String[] data = CourierDBM.database.getVouchersByTime(this.date);
         
         for (String d : data) {
             String[] line = d.split(",");

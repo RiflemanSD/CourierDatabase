@@ -29,11 +29,11 @@ public class PackageInS {
         this.time = time;
     }
 
-    public int getDistributorId() {
+    public int getCourierId() {
         return distributorId;
     }
 
-    public void setDistributorId(int distributorId) {
+    public void setCourierId(int distributorId) {
         this.distributorId = distributorId;
     }
     

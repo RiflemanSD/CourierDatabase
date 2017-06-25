@@ -59,11 +59,11 @@ public class PackageOutS {
         this.voucherId = voucherId;
     }
 
-    public int getDistributorId() {
+    public int getCourierId() {
         return distributorId;
     }
 
-    public void setDistributorId(int distributorId) {
+    public void setCourierId(int distributorId) {
         this.distributorId = distributorId;
     }
 

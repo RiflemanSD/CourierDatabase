@@ -7,19 +7,19 @@ package org.riflemansd.courierdb.gui.test;
 
 import javax.swing.JOptionPane;
 import org.riflemansd.courierdb.CourierDBM;
-import org.riflemansd.courierdb.entrys.dbs.DistributorS;
+import org.riflemansd.courierdb.entrys.dbs.CourierS;
 import org.riflemansd.courierdb.utils.MyUtils;
 
 /**
  *
  * @author RiflemanSD
  */
-public class InsertDistributor extends javax.swing.JPanel {
+public class InsertCourier extends javax.swing.JPanel {
 
     /**
-     * Creates new form InsertDistributor
+     * Creates new form InsertCourier
      */
-    public InsertDistributor() {
+    public InsertCourier() {
         initComponents();
     }
 
@@ -34,9 +34,7 @@ public class InsertDistributor extends javax.swing.JPanel {
 
         jLabel2 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        distIDTF = new javax.swing.JTextField();
         distNameTF = new javax.swing.JTextField();
         insertButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -44,19 +42,8 @@ public class InsertDistributor extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Διανομέας");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("ID:");
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Όνομα:");
-
-        distIDTF.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        distIDTF.setPreferredSize(new java.awt.Dimension(6, 25));
-        distIDTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                distIDTFActionPerformed(evt);
-            }
-        });
 
         distNameTF.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         distNameTF.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +62,11 @@ public class InsertDistributor extends javax.swing.JPanel {
 
         cancelButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -83,10 +75,6 @@ public class InsertDistributor extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(distIDTF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jSeparator2)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,14 +98,10 @@ public class InsertDistributor extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(distIDTF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(distNameTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(insertButton)
                     .addComponent(cancelButton))
@@ -125,40 +109,39 @@ public class InsertDistributor extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void distIDTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_distIDTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_distIDTFActionPerformed
-
     private void distNameTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_distNameTFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_distNameTFActionPerformed
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
-        String id = this.distIDTF.getText();
-        if (id.isEmpty())  {
-            JOptionPane.showMessageDialog(this, "Το ID δεν μπορεί να είναι κενό", "Αποτυχία", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
         String name = this.distNameTF.getText();
         if (name.isEmpty())  {
             JOptionPane.showMessageDialog(this, "Το όνομα δεν μπορεί να είναι κενό", "Αποτυχία", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        CourierDBM.database.saveDistributor(new DistributorS(MyUtils.stringToInt(id), name));
-        JOptionPane.showMessageDialog(this, "Ο Διανομέας με ID: " + id + ", Όνομα: " + name + " προστέθηκε στη βάση!", "Επιτυχία", JOptionPane.INFORMATION_MESSAGE);
+        CourierS d = CourierDBM.database.saveCourier(name);
+        if (d != null) {
+            JOptionPane.showMessageDialog(this, "Ο Διανομέας με ID: " + d.getdID() + ", Όνομα: " + d.getName() + " προστέθηκε στη βάση!", "Επιτυχία", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Υπάρχει ήδη ένας διανομέας με αυτό το όνομα.", "Αποτυχία", JOptionPane.ERROR_MESSAGE);
+        }
         
-        this.distIDTF.setText("");
         this.distNameTF.setText("");
     }//GEN-LAST:event_insertButtonActionPerformed
+
+    
+    
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JTextField distIDTF;
     private javax.swing.JTextField distNameTF;
     private javax.swing.JButton insertButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator2;

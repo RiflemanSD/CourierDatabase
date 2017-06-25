@@ -16,7 +16,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -29,8 +29,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="voucherIDTF" max="32767" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel5" min="-2" pref="67" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jComboBox1" pref="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -42,12 +47,17 @@
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="voucherIDTF" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="16" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="kataxwrisiButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -85,6 +95,32 @@
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&#x391;&#x3ba;&#x3cd;&#x3c1;&#x3c9;&#x3c3;&#x3b7;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="&#x39b;&#x3cc;&#x3b3;&#x3bf;&#x3c2;:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="0"/>
+        </Property>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="7">
+            <StringItem index="0" value="&#x395;&#x3b9;&#x3b4;&#x3bf;&#x3c0;&#x3bf;&#x3b9;&#x3b7;&#x3c4;&#x3ae;&#x3c1;&#x3b9;&#x3bf;"/>
+            <StringItem index="1" value="&#x394;&#x3b5;&#x3bd; &#x391;&#x3c0;&#x3ac;&#x3bd;&#x3c4;&#x3b7;&#x3c3;&#x3b5;"/>
+            <StringItem index="2" value="&#x394;&#x3b5;&#x3bd; &#x3a0;&#x3b1;&#x3c1;&#x3b1;&#x3b4;&#x3cc;&#x3b8;&#x3b7;&#x3ba;&#x3b5;"/>
+            <StringItem index="3" value="&#x391;&#x3c0;&#x3bf;&#x3b3;&#x3b5;&#x3c5;&#x3bc;&#x3b1;&#x3c4;&#x3b9;&#x3bd;&#x3cc;"/>
+            <StringItem index="4" value="&#x386;&#x3b3;&#x3bd;&#x3c9;&#x3c3;&#x3c4;&#x3bf;"/>
+            <StringItem index="5" value="&#x391;&#x3bb;&#x3bb;&#x3b1;&#x3b3;&#x3ae; &#x394;&#x3b9;&#x3b5;&#x3cd;&#x3b8;&#x3b7;&#x3bd;&#x3c3;&#x3b7;&#x3c2;"/>
+            <StringItem index="6" value="&#x386;&#x3bb;&#x3bb;&#x3bf;"/>
+          </StringArray>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>
