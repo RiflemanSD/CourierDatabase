@@ -22,7 +22,7 @@ public class CourierDBS {
         manager.createTable("courier", "id,did,name", 1, 1, "name");
         
         manager.createTable("voucher", "id,voucherid,codcash,chargecash,isreceipt", 1, "vid", 1, 1, true);
-        manager.createTable("voucherinfo", "id,voucherid,name,address,city,postcode,county,country", 1, 1, "null", "null", 1, "null", "null", "null");
+        manager.createTable("voucherinfo", "id,voucherid,name,address,city,postcode,county,country,time,emergency,phone", 1, 1, "null", "null", 1, "null", "null", "null", "null", true, "null");
         
         manager.createTable("packageout", "id,voucherid,courierid,time,rtime,info", 1, 1, 1, "null", "null", "null");
         manager.createTable("packagein", "id,voucherid,courierid,time", 1, 1, 1, "rtime");
@@ -39,19 +39,22 @@ public class CourierDBS {
         int postcode = voucher.getPostcode();
         String county = voucher.getCounty();
         String country = voucher.getCountry();
+        String time = voucher.getTime();
+        boolean emergency = voucher.isEmergercy(); String isem = MyUtils.booleanToString(emergency);
+        String phone = voucher.getPhone();
         
         VoucherInfoS v = getVoucherInfo(voucherid);
         if (v != null) {
-            manager.update("voucher", "name = '" + name + "', address = '" + address + "', city = '" + city + "', postcode = " + postcode + ", county = '" + county + "', country = '" + country + "'", "voucherid = " + voucherid);
+            manager.update("voucher", "name = '" + name + "', address = '" + address + "', city = '" + city + "', postcode = " + postcode + ", county = '" + county + "', country = '" + country + "', time = '" + time + "', emergency = '" + isem + "', phone = '" + phone + "'", "voucherid = " + voucherid);
         }
         else {
-            manager.insert("voucherinfo","voucherid,name,address,city,postcode,county,country", voucherid, name, address, city, postcode, county, country);
+            manager.insert("voucherinfo","voucherid,name,address,city,postcode,county,country,time,emergency,phone", voucherid, name, address, city, postcode, county, country, time, emergency,phone);
         }
         
         return true;
     }
     public VoucherInfoS getVoucherInfo(int voucherid) {
-        String result = manager.select("voucherinfo","id,voucherid,name,address,city,postcode,county,country", "voucherid = " + voucherid, 8);
+        String result = manager.select("voucherinfo","id,voucherid,name,address,city,postcode,county,country,time,emergency,phone", "voucherid = " + voucherid, 11);
         
         if (result.length() == 0) return null;
         
@@ -64,8 +67,11 @@ public class CourierDBS {
         int postcode = -1; if (!r[5].equals("NULL")) postcode = MyUtils.stringToInt(r[2]);
         String county = r[6];
         String country = r[7];
+        String time = r[8];
+        boolean emergency = MyUtils.stringToBoolean(r[9]);
+        String phone = r[10];
         
-        VoucherInfoS v = new VoucherInfoS(id, voucherid, name, address, city, postcode, county, country);
+        VoucherInfoS v = new VoucherInfoS(id, voucherid, name, address, city, postcode, county, country, time, emergency, phone);
         System.out.println(v);
         return v;
     }

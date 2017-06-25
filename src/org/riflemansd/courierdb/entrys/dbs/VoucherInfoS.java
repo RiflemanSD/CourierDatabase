@@ -19,8 +19,11 @@ public class VoucherInfoS extends Entry {
     private int postcode;
     private String county;
     private String country;
+    private String time;
+    private boolean emergercy;
+    private String phone;
     
-    public VoucherInfoS(int id, int voucherid, String name, String address, String city, int postcode, String county, String country) {
+    public VoucherInfoS(int id, int voucherid, String name, String address, String city, int postcode, String county, String country, String time, boolean emergency, String phone) {
         super(id, name);
         
         this.voucherid = voucherid;
@@ -29,9 +32,12 @@ public class VoucherInfoS extends Entry {
         this.postcode = postcode;
         this.county = county;
         this.country = country;
+        this.time = time;
+        this.emergercy = emergency;
+        this.phone = phone;
     }
-    public VoucherInfoS(int id, int voucherid, String name, String address, String city) {
-        super(id, name);
+    public VoucherInfoS(int voucherid, String name, String address, String city) {
+        super(name);
         
         this.voucherid = voucherid;
         this.address = address;
@@ -39,9 +45,12 @@ public class VoucherInfoS extends Entry {
         this.postcode = 57010;
         this.county = "ΘΕΣΣΑΛΟΝΙΚΗ";
         this.country = "ΕΛΛΑΔΑ";
+        this.time = "";
+        this.emergercy = false;
+        this.phone = "";
     }
-    public VoucherInfoS(int id, int voucherid, String address, String city) {
-        super(id, "null");
+    public VoucherInfoS(int voucherid, String address, String city) {
+        super("null");
         
         this.voucherid = voucherid;
         this.address = address;
@@ -49,6 +58,38 @@ public class VoucherInfoS extends Entry {
         this.postcode = 57010;
         this.county = "ΘΕΣΣΑΛΟΝΙΚΗ";
         this.country = "ΕΛΛΑΔΑ";
+        this.time = "";
+        this.emergercy = false;
+        this.phone = "";
+    }
+    public VoucherInfoS(int voucherid, String address, String city, String name, String time, boolean emergency, String phone) {
+        super(name);
+        
+        this.voucherid = voucherid;
+        this.address = address;
+        this.city = city;
+        this.postcode = 57010;
+        this.county = "ΘΕΣΣΑΛΟΝΙΚΗ";
+        this.country = "ΕΛΛΑΔΑ";
+        this.phone = phone;
+        this.time = time;
+        this.emergercy = emergency;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public boolean isEmergercy() {
+        return emergercy;
+    }
+
+    public void setEmergercy(boolean emergercy) {
+        this.emergercy = emergercy;
     }
 
     public String getAddress() {
@@ -98,10 +139,18 @@ public class VoucherInfoS extends Entry {
     public void setVoucherid(int voucherid) {
         this.voucherid = voucherid;
     }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
     
     @Override
     public String toString() {
-        String str = this.voucherid + "," + this.getName() + "," + this.address + "," + this.city + "," + this.postcode + "," + this.county + "," + this.country;
+        String str = this.voucherid + "," + this.getName() + "," + this.address + "," + this.city + "," + this.postcode + "," + this.county + "," + this.country + "," + time + "," + emergercy + "," + phone;
         
         return str;
     }

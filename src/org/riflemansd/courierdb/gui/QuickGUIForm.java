@@ -7,12 +7,17 @@ package org.riflemansd.courierdb.gui;
 
 import java.util.ArrayList;
 import java.util.Date;
+import org.riflemansd.courierdb.CourierDBM;
+import org.riflemansd.courierdb.entrys.dbs.PackageInS;
+import org.riflemansd.courierdb.entrys.dbs.VoucherInfoS;
+import org.riflemansd.courierdb.entrys.dbs.VoucherS;
+import org.riflemansd.courierdb.utils.MyUtils;
 
 /**
  *
  * @author sotir
  */
-public final class QuickGUIForm extends javax.swing.JFrame {
+public final class QuickGUIForm extends javax.swing.JFrame{
     private MyAutoCompleteListener l;
     private ArrayList<City> citys;
     private String nameCitys;
@@ -46,6 +51,8 @@ public final class QuickGUIForm extends javax.swing.JFrame {
         this.jLabel12.setVisible(false);
         this.demaCheck.setVisible(false);
         this.fakelosCheck.setVisible(false);
+        
+        this.rootPane.setDefaultButton(this.insertButton);
     }
      
     public void initAutoCompletes() {
@@ -95,6 +102,35 @@ public final class QuickGUIForm extends javax.swing.JFrame {
         //else {
             //this.addressTF.setWords((pefka + filiro + asvestohori + xortiatis).split("\n"));
         //}
+    }
+    
+    private boolean insertToDB() {
+        System.out.println("Insert..");
+        String voucher = voucherTF.getValue();
+        
+        VoucherS voucherS = new VoucherS(voucher);
+        
+        if (!CourierDBM.database.saveVoucher(voucherS)) return false;
+        voucherS = CourierDBM.database.getVoucher(voucher);
+        
+        String address = addressTF.getValue();
+        String city = cityTF.getValue();
+        //String pcode = pcodeTF.getValue();
+        String name = nameTF.getValue();
+        String phone = phoneTF.getValue();
+        String time = "";
+        if (timeCheck.isSelected()) time += timeFrom.getValue() + "-" + timeTo.getValue();
+        if (orTimeCheck.isSelected() && timeCheck.isSelected()) time += "," + orTimeFrom.getValue() + "-" + orTimeTo.getValue();
+        else if (orTimeCheck.isSelected()) time += orTimeFrom.getValue() + "-" + orTimeTo.getValue();
+        boolean emergency = epeigonCheck.isSelected();
+        
+        VoucherInfoS voucherinfo = new VoucherInfoS(voucherS.getId(), address, city, name, time, emergency, phone);
+        System.out.println(voucherinfo);
+        CourierDBM.database.saveVoucherInfo(voucherinfo);
+        
+        CourierDBM.database.savePackageIn(new PackageInS(voucherS.getId(), -1, MyUtils.currentTime()));
+        
+        return true;
     }
     
     /**
@@ -418,7 +454,7 @@ public final class QuickGUIForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
-        
+        this.insertToDB();
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printButtonActionPerformed

@@ -12,24 +12,24 @@ package org.riflemansd.courierdb.entrys.dbs;
 public class PackageOutS {
     private int id;
     private int voucherId;
-    private int distributorId;
+    private int courierId;
     private String time;
     private String rtime;
     private String info;
 
-    public PackageOutS(int id, int voucherId, int distributorId, String time, String rtime) {
+    public PackageOutS(int id, int voucherId, int courierId, String time, String rtime) {
         this.id = id;
         this.voucherId = voucherId;
-        this.distributorId = distributorId;
+        this.courierId = courierId;
         this.time = time;
         this.rtime = rtime;
         this.info = null;
     }
 
-    public PackageOutS(int id, int voucherId, int distributorId, String time, String rtime, String info) {
+    public PackageOutS(int id, int voucherId, int courierId, String time, String rtime, String info) {
         this.id = id;
         this.voucherId = voucherId;
-        this.distributorId = distributorId;
+        this.courierId = courierId;
         this.time = time;
         this.rtime = rtime;
         this.info = info;
@@ -60,11 +60,11 @@ public class PackageOutS {
     }
 
     public int getCourierId() {
-        return distributorId;
+        return courierId;
     }
 
-    public void setCourierId(int distributorId) {
-        this.distributorId = distributorId;
+    public void setCourierId(int courierId) {
+        this.courierId = courierId;
     }
 
     public String getTime() {
