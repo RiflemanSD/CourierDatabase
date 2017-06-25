@@ -5,9 +5,6 @@
  */
 package org.riflemansd.courierdb.database;
 
-import org.riflemansd.courierdb.entrys.Address;
-import org.riflemansd.courierdb.entrys.Customer;
-import org.riflemansd.courierdb.entrys.FullAddress;
 import org.riflemansd.courierdb.entrys.dbs.CourierS;
 import org.riflemansd.courierdb.entrys.dbs.PackageInS;
 import org.riflemansd.courierdb.entrys.dbs.PackageOutS;
