@@ -71,8 +71,12 @@ public class Tameio extends javax.swing.JFrame {
         String[] data = CourierDBM.database.getVouchersByTime(this.date);
         
         for (String d : data) {
+            System.out.println("d = " + d);
             String[] line = d.split(",");
             
+            if (line.length < 3) break;
+            
+            System.out.println("TO DOYLEMA TIS ARKOUDAS " + line.length);
             int voucherid = MyUtils.stringToInt(line[0]); //voucherid
             VoucherS voucher = CourierDBM.database.getVoucher(voucherid);
             

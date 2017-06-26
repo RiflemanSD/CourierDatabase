@@ -48,11 +48,14 @@ public class Ekkremoun extends javax.swing.JPanel {
             int voucherid = MyUtils.stringToInt(line[0]); //voucherid
             System.out.println(line[0]);
             VoucherS voucher = CourierDBM.database.getVoucher(voucherid);
-            String is = "Όχι";
-            if (voucher.isReceipt()){
-                is = "Ναι";
-            } 
-            if (voucher != null) gui.addRow(voucher.getName(), is);
+            
+            if (voucher != null) {
+                String is = "Όχι";
+                if (voucher.isReceipt()){
+                    is = "Ναι";
+                } 
+                gui.addRow(voucher.getName(), is);
+            }
         }
         gui.sort();
     }

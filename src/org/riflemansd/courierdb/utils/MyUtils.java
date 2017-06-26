@@ -28,6 +28,7 @@ public class MyUtils {
         else return "false";
     }
     public static int stringToInt(String str) {
+        //System.out.println("EGW POY LALEITE EIMAI " + str);
         int number = -1;
         
         try {

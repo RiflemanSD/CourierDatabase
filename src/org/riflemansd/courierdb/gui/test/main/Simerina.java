@@ -44,15 +44,19 @@ public class Simerina extends javax.swing.JPanel {
         
         for (String d : data) {
             String[] line = d.split(",");
+            if (line.length == 0) break;
             
             int voucherid = MyUtils.stringToInt(line[0]); //voucherid
             System.out.println(line[0]);
             VoucherS voucher = CourierDBM.database.getVoucher(voucherid);
-            String is = "Όχι";
-            if (voucher.isReceipt()){
-                is = "Ναι";
-            } 
-            if (voucher != null) gui.addRow(voucher.getName(), is);
+            
+            if (voucher != null) {
+                String is = "Όχι";
+                if (voucher.isReceipt()){
+                    is = "Ναι";
+                } 
+                gui.addRow(voucher.getName(), is);
+            }
         }
         gui.sort();
     }
