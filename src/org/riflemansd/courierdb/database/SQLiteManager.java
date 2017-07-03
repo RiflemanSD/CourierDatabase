@@ -3,6 +3,8 @@ package org.riflemansd.courierdb.database;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.riflemansd.courierdb.utils.TimeCalc;
@@ -155,6 +157,58 @@ public class SQLiteManager {
                     result += "," + temp;
                     count++;
                 }
+            }
+            rs.close();
+            stmt.close();
+            
+            //return DBData.NO_ERROR;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteManager.class.getName()).log(Level.SEVERE, null, ex);
+            
+            //return DBData.ERROR_Statement;
+        }
+        //if (result.length() < 1) return null;
+        //System.out.println("re " + result + " re");
+        return result;
+    }
+    
+    /**
+     * 
+     * @param query
+     * @param numberOfColumns
+     * @return - the resault, a list with objects: item1 = {1,name,80} item2 =  {2,name,...
+     */
+    public ArrayList<Object[]> executeQueryToObjects(String query, int numberOfColumns) {
+        ArrayList<Object[]> result = new ArrayList<>();
+        
+        int count = 0;
+        //String result = "";
+        try {
+            Statement stmt = null;
+            stmt = c.createStatement();
+            
+            //System.out.println(stmt.getMaxRows() + " " + stmt.getMaxFieldSize());
+            ResultSet rs = stmt.executeQuery(query);
+            Object temp = null;
+            Object[] o = new Object[numberOfColumns];
+            
+            while (rs.next()) {
+                if (count == numberOfColumns-1) {
+                    result.add(o);
+                    count = 0;
+                    o = new Object[numberOfColumns];
+                }
+                
+                temp = rs.getObject(1);
+                o[0] = temp;
+                
+                for (int i = 2; i <= numberOfColumns; i++) {
+                    temp = rs.getObject(i);
+                    
+                    o[i-1] = temp;
+                    count++;
+                }
+                System.out.println(Arrays.toString(o));
             }
             rs.close();
             stmt.close();

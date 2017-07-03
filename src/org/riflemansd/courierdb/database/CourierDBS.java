@@ -5,6 +5,11 @@
  */
 package org.riflemansd.courierdb.database;
 
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import org.riflemansd.courierdb.entrys.dbs.CourierS;
 import org.riflemansd.courierdb.entrys.dbs.PackageInS;
 import org.riflemansd.courierdb.entrys.dbs.PackageOutS;
@@ -291,6 +296,16 @@ public class CourierDBS {
         }
         
         if (table != null) manager.delete(table, "id = " + rowId);
+    }
+    
+    public ArrayList<Object[]> getAll3(String voucher) {
+        String sql = "SELECT voucher.voucherid, voucherinfo.address, voucherinfo.city, voucher.chargecash, voucher.codcash, packagein.time, packageout.time "
+                + "FROM voucher LEFT JOIN voucherinfo ON voucher.voucherid = voucherinfo.voucherid "
+                + "LEFT JOIN packageout ON voucher.voucherid = packageout.voucherid "
+                + "LEFT JOIN packagein ON voucher.voucherid = packagein.voucherid "
+                + "WHERE voucher.voucherid LIKE '%" + voucher + "%' OR voucherinfo.address LIKE '%" + voucher + "%'";
+        
+        return this.manager.executeQueryToObjects(sql, 7);
     }
     
     public void close() {

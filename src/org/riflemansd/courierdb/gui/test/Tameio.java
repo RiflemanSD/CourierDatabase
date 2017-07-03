@@ -24,7 +24,6 @@ import org.riflemansd.courierdb.CourierDBM;
 import org.riflemansd.courierdb.entrys.dbs.CourierS;
 import org.riflemansd.courierdb.entrys.dbs.VoucherS;
 import org.riflemansd.courierdb.gui.excel.MyExcelDocument;
-import org.riflemansd.courierdb.gui.searchpreview.GUIDataTestPanel;
 import org.riflemansd.courierdb.gui.searchpreview.GUIDataTestPanelNosearch;
 import org.riflemansd.courierdb.utils.MyUtils;
 import org.riflemansd.courierdb.utils.OpenProjectFiles;

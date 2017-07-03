@@ -15,6 +15,7 @@ import org.riflemansd.courierdb.gui.test.Tameio;
 import org.riflemansd.courierdb.gui.test.Test;
 import org.riflemansd.courierdb.gui.test.Test2;
 import org.riflemansd.courierdb.gui.test.Test3CouriersGUIData;
+import org.riflemansd.courierdb.gui.test.Test5;
 import org.riflemansd.courierdb.gui.test.main.MainGUI;
 
 /**
@@ -187,8 +188,9 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        Test2 t = new Test2();
-        CourierDBM.database.getVouchersByTime("09-05-2016");
+        Test5 t = new Test5();
+        //Test2 t = new Test2();
+        //CourierDBM.database.getVouchersByTime("09-05-2016");
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
