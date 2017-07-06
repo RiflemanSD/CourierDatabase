@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import org.riflemansd.courierdb.entrys.dbs.CourierS;
 import org.riflemansd.courierdb.entrys.dbs.PackageInS;
 import org.riflemansd.courierdb.entrys.dbs.PackageOutS;
+import org.riflemansd.courierdb.entrys.dbs.ReceiptInfoS;
 import org.riflemansd.courierdb.entrys.dbs.VoucherInfoS;
 import org.riflemansd.courierdb.entrys.dbs.VoucherS;
 import org.riflemansd.courierdb.utils.MyUtils;
@@ -29,11 +30,42 @@ public class CourierDBS {
         manager.createTable("voucher", "id,voucherid,codcash,chargecash,isreceipt", 1, "vid", 1, 1, true);
         manager.createTable("voucherinfo", "id,voucherid,name,address,city,postcode,county,country,time,emergency,phone", 1, 1, "null", "null", 1, "null", "null", "null", "null", true, "null");
         
+        manager.createTable("receiptinfo", "id,voucherid,imagepath", 1, 1, "path");
+        
         manager.createTable("packageout", "id,voucherid,courierid,time,rtime,info", 1, 1, 1, "null", "null", "null");
         manager.createTable("packagein", "id,voucherid,courierid,time", 1, 1, 1, "rtime");
         
         //Settings
         manager.createTable("settings", "id,name,value", 1, "s", "s");
+    }
+    
+    public boolean saveReceiptInfo(ReceiptInfoS voucher) {
+        int voucherid = voucher.getVoucherid(); if (voucherid < 0) return false;
+        String imagePath = voucher.getImagePath();
+        
+        VoucherInfoS v = getVoucherInfo(voucherid);
+        if (v != null) {
+            manager.update("receiptinfo", "imagepath = '" + imagePath, "voucherid = " + voucherid);
+        }
+        else {
+            manager.insert("receiptinfo","voucherid,imagepath", voucherid, imagePath);
+        }
+        
+        return true;
+    }
+    public ReceiptInfoS getReceiptInfo(int voucherid) {
+        String result = manager.select("receiptinfo","id,voucherid,imagepath", "voucherid = " + voucherid, 3);
+        
+        if (result.length() == 0) return null;
+        
+        String[] r = result.split(",");
+        
+        int id = -1; if (!r[0].equals("NULL")) id = MyUtils.stringToInt(r[0]);
+        String imagePath = r[2];
+        
+        ReceiptInfoS v = new ReceiptInfoS(id, voucherid, imagePath);
+        System.out.println(v);
+        return v;
     }
     
     public boolean saveVoucherInfo(VoucherInfoS voucher) {

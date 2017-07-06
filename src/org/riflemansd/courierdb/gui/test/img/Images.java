@@ -19,7 +19,10 @@ import javax.imageio.ImageIO;
 public class Images {
     public static void main(String[] args) {
         try {
-            BufferedImage image = ImageIO.read(new File("A4.jpg"));
+            String filePath = "SCAN_13282906_1779119428986302_1868779512_o.jpg";
+            
+            //filePath = "A4.jpg";
+            BufferedImage image = ImageIO.read(new File(filePath));
             
             int h = image.getHeight();
             int w = image.getWidth();
